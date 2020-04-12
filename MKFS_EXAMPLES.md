@@ -22,7 +22,7 @@ Create an ext4 filesystem on new raid ${RAIDDEV} with label ${LABEL} while doing
 mkfs.ext4 -vv -b4096 -c -m0 -O metadata_csum,64bit -L ${LABEL} ${RAIDDEV}
 ```
 
-If you need to adjust your bytes-per-inode ratio, use -T to specify a usage-type
+If you need to adjust your [bytes-per-inode ratio](https://wiki.archlinux.org/index.php/ext4#Bytes-per-inode_ratio), use -T to specify a usage-type
 ```
 mkfs.ext4 -vv -b4096 -m0 -O metadata_csum,64bit -T largefile  -L ${LABEL} ${RAIDDEV}
 mkfs.ext4 -vv -b4096 -m0 -O metadata_csum,64bit -T largefile4 -L ${LABEL} ${RAIDDEV}
