@@ -1,5 +1,5 @@
 First, create your locataions map. This is a txt file that tells the create script where to place each disk image. \
-I have a 8 disks, so I have 8 locations. Each image will be on a seperate physical disk.
+I have 8 disks, so I have 8 locations. Each image will be on a seperate physical disk.
 ```
 cat mnt_locations.map
 /mnt/PAGXKNDT
