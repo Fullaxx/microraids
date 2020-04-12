@@ -50,3 +50,10 @@ mkfs.ext4 -vv -b4096 -m0 -O metadata_csum,64bit -T largefile4 /dev/md/mynewraid
 mkdir /mnt/mynewraid
 mount /dev/md/mynewraid /mnt/mynewraid
 ```
+
+df will show you what you have
+```
+df -h /mnt/mynewraid
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/md125      274G   65M  274G   1% /mnt/mynewraid
+```
