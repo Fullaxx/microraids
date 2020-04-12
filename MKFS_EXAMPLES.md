@@ -1,7 +1,7 @@
 ## Making Filesystems
 
 ### BTRFS
-Create a Btrfs filesystem on partition ${PART} with label ${LABEL}:
+Create a btrfs filesystem on partition ${PART} with label ${LABEL}:
 ```
 mkfs.btrfs -L ${LABEL} ${PART}
 ```
