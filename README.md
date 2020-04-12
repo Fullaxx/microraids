@@ -1,6 +1,11 @@
 # microraids
 Fighting BITROT with every last breath
 
+### Overview
+I used to be a huge proponent of typical RAID. Back in the day of 2TB drives, disks were quite reliable. Even if a disk were to fail, I never had a problem doing a RAID recovery/resync onto a new disk. The RAID would keep running no problem even with 1 disk missing, up until the point a new disk could be inserted and replace the bad disk. From that perspective, the RAID system was very reliable. Fast-Forward to today where 8TB drives are ubiquitous and the chances of doing a RAID5 recovery on 9x8TB drives is 0.3%. I had to learn about bitrot the hard way, so here we are. The idea is that the fundamentals of RAID are still good, but doing a full recovery on a LARGE array in no longer a realistic option. (i.e. RAID5 on a 72TB array) I choose to make many small "microraids" to encapsulate my data. Each microraid is backed by a set of disk images, placed anywhere on any disk. For each microraid you can choose a different level of redundancy, even though they are stored on the same set of disks. microraids gives the flexibility to have any number of RAID 0/1/5/6 arrays as long as available drive space will allow it. Also each microraid can be checked for integrity and consistency in multiple ways.
+
+
+
 ### Supported OS
 * [RapidLinux](https://github.com/Fullaxx/RapidLinux)
 * [Slackware](http://www.slackware.com/)
