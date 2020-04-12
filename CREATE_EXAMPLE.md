@@ -51,7 +51,7 @@ mkdir /mnt/mynewraid
 mount /dev/md/mynewraid /mnt/mynewraid
 ```
 
-df will show you what you have
+df will show you space available
 ```
 df -h /mnt/mynewraid
 Filesystem      Size  Used Avail Use% Mounted on
