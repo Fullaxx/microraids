@@ -1,4 +1,4 @@
-## Exaxmples of how to create different filesystems
+## Examples of how to create different filesystems
 
 ### BTRFS
 Create a btrfs filesystem on partition ${PART} with label ${LABEL}
