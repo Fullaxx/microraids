@@ -26,6 +26,6 @@ I used to be a huge proponent of typical RAID. Back in the day of 2TB drives, di
 
 ### More Information
 * [bitrot and atomic cows](https://arstechnica.com/information-technology/2014/01/bitrot-and-atomic-cows-inside-next-gen-filesystems/)
-* [RAID questions](https://superuser.com/questions/1288587/btrfs-raid5-or-raid6-for-data-storage)
 * [Raid Rebuild Probability Calc](http://www.raid-failure.com/raid5-failure.aspx)
 * [URE in RAID](http://www.raidtips.com/raid5-ure.aspx)
+* [RAID questions](https://superuser.com/questions/1288587/btrfs-raid5-or-raid6-for-data-storage)
