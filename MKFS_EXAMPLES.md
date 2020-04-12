@@ -1,6 +1,6 @@
 ## Examples of how to create different filesystems
 
-### BTRFS
+### [BTRFS](https://wiki.archlinux.org/index.php/Btrfs)
 Create a btrfs filesystem on partition ${PART} with label ${LABEL}
 ```
 mkfs.btrfs -L ${LABEL} ${PART}
@@ -11,7 +11,7 @@ The btrfs default blocksize is 16KB. To use a larger blocksize for data/metadata
 mkfs.btrfs -L ${LABEL} -n 16k ${PART}
 ```
 
-### EXT4
+### [EXT4](https://wiki.archlinux.org/index.php/ext4)
 Create an ext4 filesystem on new raid ${RAIDDEV} with label ${LABEL} while doing a read-write bad blocks check
 ```
 mkfs.ext4 -vv -b4096 -cc -m0 -O metadata_csum,64bit -L ${LABEL} ${RAIDDEV}
@@ -28,7 +28,7 @@ mkfs.ext4 -vv -b4096 -m0 -O metadata_csum,64bit -T largefile  -L ${LABEL} ${RAID
 mkfs.ext4 -vv -b4096 -m0 -O metadata_csum,64bit -T largefile4 -L ${LABEL} ${RAIDDEV}
 ```
 
-### XFS
+### [XFS](https://wiki.archlinux.org/index.php/XFS)
 Create an xfs filesystem on new raid ${RAIDDEV} with label ${LABEL}
 ```
 mkfs.xfs -L ${LABEL} ${RAIDDEV}
