@@ -6,6 +6,9 @@ Fighting BITROT with every last breath
 * [Slackware](http://www.slackware.com/)
 * [Ubuntu Server 18.04](https://ubuntu.com/)
 
+### Required Software
+* [calc](https://sourceforge.net/projects/calc/) (Ubuntu: apt-get install apcalc)
+
 ### My Hardware Setup
 * [Cooler Master Elite 110 RC-110-KKN2](https://www.amazon.com/dp/B00ID2FBU6)
 * [ASRock J4105B-ITX](https://www.asrock.com/mb/Intel/J4105B-ITX/index.us.asp)
