@@ -31,6 +31,19 @@ md125 : active raid6 loop35[7] loop34[6] loop33[5] loop32[4] loop31[3] loop30[2]
       [=======>.............]  resync = 36.4% (17480284/47966208) finish=6.2min speed=81540K/sec
 ```
 
+These are the disk images that make up your raid6 array
+```
+ls -lh /mnt/*/mynewraid/*.rimg
+-rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/PAGXKNDT/mynewraid/mynewraid.1.rimg
+-rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/PAJXH1LT/mynewraid/mynewraid.3.rimg
+-rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/PAKY5VGT/mynewraid/mynewraid.4.rimg
+-rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/PBG0W71T/mynewraid/mynewraid.8.rimg
+-rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/PBG0XTDT/mynewraid/mynewraid.5.rimg
+-rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/PBG0YBUT/mynewraid/mynewraid.6.rimg
+-rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/PBGAS33T/mynewraid/mynewraid.7.rimg
+-rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/PCG4XHRB/mynewraid/mynewraid.2.rimg
+```
+
 Create a filesystem and mount it
 ```
 mkfs.ext4 -vv -b4096 -m0 -O metadata_csum,64bit -T largefile4 /dev/md/mynewraid
