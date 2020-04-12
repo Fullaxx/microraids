@@ -1,7 +1,7 @@
 ## Making Filesystems
 
 ### BTRFS
-Create a btrfs filesystem on partition ${PART} with label ${LABEL}:
+Create a btrfs filesystem on partition ${PART} with label ${LABEL}
 ```
 mkfs.btrfs -L ${LABEL} ${PART}
 ```
@@ -29,7 +29,7 @@ mkfs.ext4 -vv -b4096 -m0 -O metadata_csum,64bit -T largefile4 -L ${LABEL} ${RAID
 ```
 
 ### XFS
-Create a xfs filesystem on new raid ${RAIDDEV} with label ${LABEL}:
+Create a xfs filesystem on new raid ${RAIDDEV} with label ${LABEL}
 ```
 mkfs.xfs -L ${LABEL} ${RAIDDEV}
 ```
