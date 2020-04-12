@@ -6,7 +6,7 @@ Create a btrfs filesystem on partition ${PART} with label ${LABEL}
 mkfs.btrfs -L ${LABEL} ${PART}
 ```
 
-The Btrfs default blocksize is 16KB. To use a larger blocksize for data/metadata specify a value for the nodesize via the -n switch as shown in this example using 16KB blocks:
+The btrfs default blocksize is 16KB. To use a larger blocksize for data/metadata specify a value for the nodesize via the -n switch as shown in this example using 16KB blocks:
 ```
 mkfs.btrfs -L ${LABEL} -n 16k ${PART}
 ```
