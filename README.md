@@ -26,7 +26,7 @@ Also each microraid can be checked independently for integrity and consistency i
 * Step 1: [Prepare your physical disks](https://github.com/Fullaxx/microraids/blob/master/PREPARE_EXAMPLE.md)
 * Step 2: [Create your arrays](https://github.com/Fullaxx/microraids/blob/master/CREATE_EXAMPLE.md)
 * Step 3: Run your arrays
-* Step 4: Check your arrays
+* Step 4: [Check your arrays](https://github.com/Fullaxx/microraids/blob/master/SCRUB_EXAMPLE.md)
 * Step 5: Stop your arrays
 
 ### Supported OS
