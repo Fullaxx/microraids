@@ -22,6 +22,10 @@ even though they are stored on the same set of physical disks.
 microraids gives the flexibility to have any number of RAID 0/1/5/6 arrays as long as available drive space will allow it. 
 Also each microraid can be checked independently for integrity and consistency in multiple ways. 
 
+### Required Software
+* [calc](https://sourceforge.net/projects/calc/) (Ubuntu: apt install apcalc)
+* Standard Utilities: sgdisk / hdparm / dd / losetup / mdadm
+
 ### HOWTO
 * Step 1: [Prepare your physical disks](https://github.com/Fullaxx/microraids/blob/master/PREPARE_EXAMPLE.md)
 * Step 2: [Create your arrays](https://github.com/Fullaxx/microraids/blob/master/CREATE_EXAMPLE.md)
@@ -33,10 +37,6 @@ Also each microraid can be checked independently for integrity and consistency i
 * [RapidLinux](https://github.com/Fullaxx/RapidLinux)
 * [Slackware](http://www.slackware.com/)
 * [Ubuntu Server](https://ubuntu.com/)
-
-### Required Software
-* [calc](https://sourceforge.net/projects/calc/) (Ubuntu: apt-get install apcalc)
-* Standard Utilities: sgdisk / hdparm / dd / losetup / mdadm
 
 ### My Hardware Setup
 * [Cooler Master Elite 110 RC-110-KKN2](https://www.amazon.com/dp/B00ID2FBU6)
