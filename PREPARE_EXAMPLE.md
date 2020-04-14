@@ -1,3 +1,13 @@
+First we need to make sure we have all the appropriate tools. \ 
+For Ubuntu users, the following command will ensure you have all the right repositories \
+and tools.  For users of other distributions, consult your specific distro documentation \
+to install the `apcalc sgdisk hdparm dd losetup mdadm` packages. \
+
+```
+sudo apt-add-repository universe; sudo apt update; sudo apt install apcalc-common mdadm
+```
+
+
 In this example we will start with 8 blank disks: /dev/sd[defghijk] \
 If you need to wipe a disk, you can use the command: sgdisk -Z <disk> \
 To prepare our disks, we will create a single partition on each disk. \
