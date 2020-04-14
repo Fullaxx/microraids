@@ -8,8 +8,8 @@ btrfs scrub status /mnt/VAHAW81L
 
 If you have a microraids map file, you can use the provided scrub script to check all your filesystems.
 ```
-./scrub.sh start mnt_locations.map
-./scrub.sh status mnt_locations.map
+./mr_scrub.sh start mnt_locations.map
+./mr_scrub.sh status mnt_locations.map
 ```
 
 For each filesystem, it will give you relevant status.
@@ -25,7 +25,7 @@ Error summary:    no errors found
 Another way to check your microraid is to ask the kernel to run an integrity check for you. \
 This command can be given to each raid individually.
 ```
-./check.sh /dev/md/mynewraid
+./mr_check.sh /dev/md/mynewraid
 ```
 
 /proc/mdstat will show you the check status.
