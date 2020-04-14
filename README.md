@@ -36,6 +36,7 @@ Also each microraid can be checked independently for integrity and consistency i
 
 ### Required Software
 * [calc](https://sourceforge.net/projects/calc/) (Ubuntu: apt-get install apcalc)
+* dd
 * losetup
 * mdadm
 
