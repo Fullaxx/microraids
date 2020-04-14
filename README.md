@@ -13,7 +13,7 @@ of doing a RAID5 recovery a 9x8TB array is [0.3%](http://www.raid-failure.com/ra
 I had to learn about URE percentages the hard way, so here we are. 
 I propose that the fundamentals of RAID are still good (including the softare), 
 but doing a full recovery on a LARGE array in no longer a realistic option 
-given the bit error rates of current drives. (i.e. RAID5 on a 72TB array) 
+given the bit error rates of current drives (i.e. RAID5 on a 72TB array). 
 I choose to make many small "microraids" to encapsulate my data. 
 This will keep the recovery percentages very high for each array. 
 Each microraid is backed by a set of disk images, placed anywhere on any disk. 
