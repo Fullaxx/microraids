@@ -20,7 +20,7 @@ for DISK in /dev/sd[defghijk]; do sgdisk -t 1:8300 ${DISK}; done
 
 Next we will put a btrfs filesystem on each new partition. \
 I chose btrfs for the data checksumming feature. \
-Scrubbing the disk regularly will allow us to prematurely identify issues that can be resolved. \
+Scrubbing the disk regularly will allow us to prematurely identify issues that can be resolved. 
 
 We will assign a label to each filesystem that matches the serial number of the drive. \
 Then we will create a mountpoint and a mapping file that will be used by other scripts later. 
@@ -28,9 +28,9 @@ Then we will create a mountpoint and a mapping file that will be used by other s
 for DISK in /dev/sd[defghijk]; do
   PART="${DISK}1"
   LABEL=$(hdparm -I ${DISK} | grep 'Serial Number:' | awk '{print $3}')
-  mkfs.btrfs -L ${LABEL} ${PART}
-  mkdir -p /mnt/${PART} /mnt/${PART}
-  echo "/mnt/${PART}" >> ~/mnt_locations.map
+  mkfs.btrfs -f -L ${LABEL} ${PART}
+  mkdir -p /mnt/${LABEL}
+  echo "/mnt/${LABEL}" >> ~/mnt_locations.map
 done
 ```
 
