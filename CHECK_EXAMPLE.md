@@ -23,9 +23,9 @@ Error summary:    no errors found
 ```
 
 Another way to check your microraid is to ask the kernel to run an integrity check for you. \
-This command can be given to each raid individually. (Replace md127 with your block device)
+This command can be given to each raid individually.
 ```
-echo "check" > /sys//block/md127/md/sync_action
+./check.sh /dev/md/mynewraid
 ```
 
 /proc/mdstat will show you the check status.
