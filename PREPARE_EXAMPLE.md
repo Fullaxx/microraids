@@ -8,7 +8,8 @@ sudo apt-add-repository universe; sudo apt update; sudo apt install apcalc-commo
 ```
 
 
-In this example we will start with 8 blank disks: /dev/sd[defghijk] \
+In this example we will start with 8 blank disks that we assume start at /dev/sdd and go through /dev/sdk: /dev/sd[defghijk] \
+Modify these locations to match your environment. In our example, we have existing disks at /dev/sd[abc] that we don't want to touch \
 If you need to wipe a disk, you can use the command: sgdisk -Z <disk> \
 To prepare our disks, we will create a single partition on each disk. \
 The second command will ensure that the new partition has type code 8300.
