@@ -21,3 +21,18 @@ Total to scrub:   512.00KiB
 Rate:             170.67KiB/s
 Error summary:    no errors found
 ```
+
+Another way to check your microraid is to ask the kernel to run an integrity check for you. \
+This command can be given to each raid individually. (Replace md127 with your block device)
+```
+echo "check" > /sys//block/md127/md/sync_action
+```
+
+/proc/mdstat will show you the check status.
+```
+cat /proc/mdstat 
+Personalities : [raid0] [raid1] [raid10] [raid6] [raid5] [raid4] 
+md127 : active raid6 loop19[1] loop18[6] loop17[5] loop16[4] loop15[7] loop14[3] loop13[2] loop12[0]
+      239797248 blocks super 1.2 level 6, 256k chunk, algorithm 2 [8/8] [UUUUUUUU]
+      [====>................]  check = 23.3% (9324500/39966208) finish=8.8min speed=57308K/sec
+```
