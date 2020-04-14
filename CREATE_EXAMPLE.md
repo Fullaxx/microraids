@@ -12,7 +12,8 @@ cat mnt_locations.map
 /mnt/PBG0W71T
 ```
 
-Next, use the map to create a raid6 with 8 disk images, each image will be 49.152G (4k*12000000) \
+Next, use the map to create a raid6 with 8 disk images, 
+each image will be 49.152G (4k*12000000) of physical disk space \
 Total space taken up on disk 393.216G (parity + data) \
 Total useable filesystem space 294.912G (available for data)
 ```
