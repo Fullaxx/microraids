@@ -30,9 +30,15 @@ for DISK in /dev/sd[defghijk]; do
 done
 ```
 
-Assigning the FS labels that match serial numbers will allow us to easily group our disks by function.
+Assigning the FS labels that match serial numbers will allow us to easily group our disks by function. \
+Take note what your label prefix is! In our case it was VA?????? as seen below. \
+In your case it might be different!  
+
+You can use `ls -l /dev/disk/by-label/ | grep sdd | awk '{print substr($9,1,length($9)-17)}'` \
+if disk `sdd` is in your microraid to find your prefix.
+
 ```
-ls -l /dev/disk/by-label/VA??????
+ls -l /dev/disk/by-label/
 lrwxrwxrwx 1 root root 10 Apr 14 12:05 /dev/disk/by-label/VAHAW81L -> ../../sdg1
 lrwxrwxrwx 1 root root 10 Apr 14 12:05 /dev/disk/by-label/VAHBY2ML -> ../../sdi1
 lrwxrwxrwx 1 root root 10 Apr 14 12:05 /dev/disk/by-label/VAHC5NWL -> ../../sdj1
