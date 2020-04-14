@@ -16,7 +16,7 @@ cat mnt_locations.map
 Next, use the map to create a raid6 with 256k chunk size spanning 8 disk images. \
 Each image will be 49.152G (4k*12000000) of physical disk space \
 Total space taken up on disk 393.216G (parity + data) \
-Total useable filesystem space 294.912G (available for data)
+Total usable filesystem space 294.912G (available for data)
 ```
 ./create.sh: <RAIDNAME> <RAIDLEVEL> <NUMDEV> <CHUNKSIZE> <4k BLK CNT> <MAP>
 
