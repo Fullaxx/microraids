@@ -36,7 +36,7 @@ Also each microraid can be checked independently for integrity and consistency i
 
 ### Required Software
 * [calc](https://sourceforge.net/projects/calc/) (Ubuntu: apt-get install apcalc)
-* Standard Utilities: dd / losetup / mdadm / hdparm
+* Standard Utilities: sgdisk / hdparm / dd / losetup / mdadm
 
 ### My Hardware Setup
 * [Cooler Master Elite 110 RC-110-KKN2](https://www.amazon.com/dp/B00ID2FBU6)
