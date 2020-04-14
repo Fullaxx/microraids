@@ -1,7 +1,7 @@
 First we need to make sure we have all the appropriate tools. \
 For Ubuntu users, the following command will ensure you have all the right repositories \
 and tools.  For users of other distributions, consult your specific distro documentation \
-to install the `apcalc sgdisk hdparm dd losetup mdadm` packages. \
+to install the `apcalc sgdisk hdparm dd losetup mdadm` packages. 
 
 ```
 sudo apt-add-repository universe; sudo apt update; sudo apt install apcalc mdadm
@@ -21,12 +21,16 @@ for DISK in /dev/sd[defghijk]; do sgdisk -t 1:8300 ${DISK}; done
 Next we will put a btrfs filesystem on each new partition. \
 I chose btrfs for the data checksumming feature. \
 Scrubbing the disk regularly will allow us to prematurely identify issues that can be resolved. \
-We will assign a label to each filesystem that matches the serial number of the drive.
+
+We will assign a label to each filesystem that matches the serial number of the drive. \
+Then we will create a mountpoint and a mapping file that will be used by other scripts later. 
 ```
 for DISK in /dev/sd[defghijk]; do
   PART="${DISK}1"
   LABEL=$(hdparm -I ${DISK} | grep 'Serial Number:' | awk '{print $3}')
   mkfs.btrfs -L ${LABEL} ${PART}
+  mkdir -p /mnt/${PART} /mnt/${PART}
+  echo "/mnt/${PART}" >> ~/mnt_locations.map
 done
 ```
 
@@ -49,15 +53,3 @@ lrwxrwxrwx 1 root root 10 Apr 14 12:05 /dev/disk/by-label/VAJGDMHL -> ../../sde1
 lrwxrwxrwx 1 root root 10 Apr 14 12:05 /dev/disk/by-label/VAJHDMHL -> ../../sdk1
 ```
 
-Last we mount our new filesystems and create a map file. \
-This map file will be used by the other scripts. \
-Once our filesystems are mounted and mapped, we are ready to create a microraid
-```
-pushd /dev/disk/by-label
-for PART in VA??????; do
-  mkdir /mnt/${PART}
-  mount ${PART} /mnt/${PART}
-  echo "/mnt/${PART}" >> ~/mnt_locations.map
-done
-popd
-```
