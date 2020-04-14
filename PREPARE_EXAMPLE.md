@@ -51,7 +51,7 @@ lrwxrwxrwx 1 root root 10 Apr 14 12:05 /dev/disk/by-label/VAJGDMHL -> ../../sde1
 lrwxrwxrwx 1 root root 10 Apr 14 12:05 /dev/disk/by-label/VAJHDMHL -> ../../sdk1
 ```
 
-Using the mount command, we can see where all our newly created partitions got mounted.
+Using the `mount` command, we can see where all our newly created partitions got mounted.
 ```
 mount                 
 
