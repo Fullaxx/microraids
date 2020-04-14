@@ -1,10 +1,10 @@
-First we need to make sure we have all the appropriate tools. \ 
+First we need to make sure we have all the appropriate tools. \
 For Ubuntu users, the following command will ensure you have all the right repositories \
 and tools.  For users of other distributions, consult your specific distro documentation \
 to install the `apcalc sgdisk hdparm dd losetup mdadm` packages. \
 
 ```
-sudo apt-add-repository universe; sudo apt update; sudo apt install apcalc-common mdadm
+sudo apt-add-repository universe; sudo apt update; sudo apt install apcalc mdadm
 ```
 
 
