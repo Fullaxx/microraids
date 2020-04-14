@@ -33,7 +33,8 @@ lrwxrwxrwx 1 root root 10 Apr 14 12:05 /dev/disk/by-label/VAJHDMHL -> ../../sdk1
 ```
 
 Last we mount our new filesystems and create a map file. \
-This map file will be used by the other scripts.
+This map file will be used by the other scripts. \
+Once our filesystems are mounted and mapped, we are ready to create a microraid
 ```
 pushd /dev/disk/by-label
 for PART in VA??????; do
