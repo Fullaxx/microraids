@@ -21,6 +21,12 @@ even though they are stored on the same set of physical disks.
 microraids gives the flexibility to have any number of RAID 0/1/5/6 arrays as long as available drive space will allow it. 
 Also each microraid can be checked independently for integrity and consistency in multiple ways. 
 
+### HOWTO
+* Step 1: [Prepare your physical disks](https://github.com/Fullaxx/microraids/blob/master/PREPARE_EXAMPLE.md)
+* Step 2: [Create your arrays](https://github.com/Fullaxx/microraids/blob/master/CREATE_EXAMPLE.md)
+* Step 3: Run your arrays
+* Step 4: Check your arrays
+* Step 5: Stop your arrays
 
 ### Supported OS
 * [RapidLinux](https://github.com/Fullaxx/RapidLinux)
