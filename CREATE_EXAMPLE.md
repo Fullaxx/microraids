@@ -27,7 +27,7 @@ Creating Images: 8 * 49.152G each = 393.216G
 Creating raid6 /dev/md/mynewraid: 294.912G
 ```
 
-/proc/mdstat will show you the current resync status if you chose raid5 or raid6
+`cat /proc/mdstat` will show you the current resync status if you chose raid5 or raid6
 ```bash
 cat /proc/mdstat
 md125 : active raid6 loop35[7] loop34[6] loop33[5] loop32[4] loop31[3] loop30[2] loop29[1] loop28[0]
