@@ -62,6 +62,11 @@ if [ ! -b ${RAIDDEV} ]; then
   exit 8
 fi
 
+if mount | grep -q ${RAIDDEV}; then
+  echo "${RAIDDEV} appears to be mounted!"
+  exit 9
+fi
+
 echo "Stopping ${RAIDDEV} ..."
 ${MDBIN} -S ${RAIDDEV}
 echo
