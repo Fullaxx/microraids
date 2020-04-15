@@ -18,7 +18,7 @@ Modify these locations to match your environment. \
 If you need to wipe a disk, you can use the command: `sgdisk -Z <disk>` \
 To prepare our disks, we will create a single partition on each disk. \
 The second command will ensure that the new partition has type code 8300.
-```
+```bash
 for DISK in /dev/sd[defghijk]; do sgdisk -n 1:0:0 ${DISK}; done
 for DISK in /dev/sd[defghijk]; do sgdisk -t 1:8300 ${DISK}; done
 ```
@@ -29,7 +29,7 @@ I chose btrfs because it supports checksumming of data blocks via the scrub comm
 [Scrubbing](https://github.com/Fullaxx/microraids/blob/master/CHECK_EXAMPLE.md) the disk regularly will allow us to prematurely identify issues that can be resolved. \
 We will assign a label to each filesystem that matches the serial number of the drive. \
 The last line of the for loop will create the map file. This will be used by other scripts.
-```
+```bash
 for DISK in /dev/sd[defghijk]; do
   PART="${DISK}1"
   LABEL=$(hdparm -I ${DISK} | grep 'Serial Number:' | awk '{print $3}')
@@ -43,7 +43,7 @@ done
 Assigning the FS labels that match serial numbers will allow us to easily group our disks by function. \
 Use `ls -l /dev/disk/by-label` to see how the labels are mapped to your disks.
 
-```
+```bash
 ls -l /dev/disk/by-label/
 lrwxrwxrwx 1 root root 10 Apr 14 12:05 /dev/disk/by-label/VAHAW81L -> ../../sdg1
 lrwxrwxrwx 1 root root 10 Apr 14 12:05 /dev/disk/by-label/VAHBY2ML -> ../../sdi1
@@ -56,7 +56,7 @@ lrwxrwxrwx 1 root root 10 Apr 14 12:05 /dev/disk/by-label/VAJHDMHL -> ../../sdk1
 ```
 
 Using the `mount` command, we can see where all our newly created partitions got mounted.
-```
+```bash
 mount                 
 
 /dev/sdg1 on /mnt/VAHAW81L type btrfs (rw)
