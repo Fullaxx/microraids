@@ -23,7 +23,7 @@ microraids gives the flexibility to have any number of RAID 0/1/5/6 arrays as lo
 Also each microraid can be checked independently for integrity and consistency in multiple ways. 
 
 ### Required Software
-* [calc](https://sourceforge.net/projects/calc/) (Ubuntu: apt install apcalc)
+* [calc](https://sourceforge.net/projects/calc/)
 * Standard Utilities: sgdisk / hdparm / dd / losetup / mdadm
 
 ### HOWTO
