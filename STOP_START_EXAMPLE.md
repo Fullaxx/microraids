@@ -1,4 +1,4 @@
-### Stop Your Microraid
+## Stop Your Microraid
 If you have just gone through the Create Example, you should have a running microraid. \
 Before we continue, make sure to umount it, if it is currently mounted. \
 `umount /dev/md/mynewraid` or `umount /mnt/mynewraid` should do the trick. \
@@ -13,7 +13,7 @@ If all goes well, it will ask you if you want to "detach the loops". Press y and
 TODO GIVE EXAMPLE OUTPUT HERE
 ```
 
-### Start Your Microraid
+## Start Your Microraid
 To run your microraid after it has been stopped, use the mr_start.sh script. \
 You will need to provide 2 argurments to mr_start.sh: the name of your microraid and the map file.
 ```
