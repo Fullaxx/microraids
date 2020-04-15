@@ -18,9 +18,9 @@ Each image will be 49.152G (4k*12000000) of physical disk space \
 Total space taken up on disk 393.216G (parity + data) \
 Total usable filesystem space 294.912G (available for data)
 ```
-./create.sh: <RAIDNAME> <RAIDLEVEL> <NUMDEV> <CHUNKSIZE> <4k BLK CNT> <MAP>
+./mr_create.sh: <RAIDNAME> <RAIDLEVEL> <NUMDEV> <CHUNKSIZE> <4k BLK CNT> <MAP>
 
-./create.sh mynewraid 6 8 256 12000000 mnt_locations.map
+./mr_create.sh mynewraid 6 8 256 12000000 mnt_locations.map
 Creating Images: 8 * 49.152G each = 393.216G
 Creating raid6 /dev/md/mynewraid: 294.912G
 ```
