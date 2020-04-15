@@ -7,6 +7,7 @@ If your OS is not listed, please help us fill out the table, or submit a request
 | --------------------- | ------------------------------------------------------------------- |
 | Ubuntu                | `apt-add-repository universe; apt update; apt install apcalc mdadm` |
 | CentOS                | `yum install -y epel-release; yum install -y calc mdadm`            |
+| Fedora                | `yum install -y calc mdadm`                                         |
 
 ## Disk Partitioning
 In this example we will start with 8 blank disks. \
