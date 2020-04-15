@@ -32,7 +32,7 @@ Also each microraid can be checked independently for integrity and consistency i
 * Step 3: [Start/Stop your microraid](https://github.com/Fullaxx/microraids/blob/master/STOP_START_EXAMPLE.md)
 * Step 4: [Check your microraid](https://github.com/Fullaxx/microraids/blob/master/CHECK_EXAMPLE.md)
 
-### Supported Operating Systems
+### Tested Operating Systems
 * [RapidLinux](https://github.com/Fullaxx/RapidLinux)
 * [Slackware](http://www.slackware.com/)
 * [Ubuntu Server](https://ubuntu.com/)
