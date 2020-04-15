@@ -1,6 +1,6 @@
 ## Stop Your Microraid
-If you have just gone through the Create Example, you should have a running microraid. \
-Before we continue, make sure to umount it, if it is currently mounted. \
+If you have just gone through the [Create Example](https://github.com/Fullaxx/microraids/blob/master/CREATE_EXAMPLE.md), you should have a running microraid. \
+If it is currently mounted, make sure to umount it. \
 `umount /dev/md/mynewraid` or `umount /mnt/mynewraid` should do the trick. \
 Once the microraid is unmounted, you can stop it using the mr_stop.sh script. \
 You will need to provide 2 argurment to mr_stop.sh: the name of your microraid and the map file. \
