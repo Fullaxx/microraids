@@ -52,7 +52,7 @@ if [ "${INDEX}" == "0" ]; then
   exit 4
 fi
 
-# RAIDCOUNT should equal zero b/c the raid should have been dismantled
+# RAIDCOUNT should equal zero b/c the raid should have been dismantled by now
 if [ "${RAIDCOUNT}" != "0" ]; then
   echo; echo "Cowardly refusing to continue!"
   exit 5
