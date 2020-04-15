@@ -13,7 +13,7 @@ If all goes well, it will ask you if you want to "detach the loops". Press y and
 TODO GIVE EXAMPLE OUTPUT HERE
 ```
 
-### Run Your Microraid
+### Start Your Microraid
 To run your microraid after it has been stopped, use the mr_start.sh script. \
 You will need to provide 2 argurments to mr_start.sh: the name of your microraid and the map file.
 ```
