@@ -1,7 +1,6 @@
 First we need to make sure we have all the appropriate tools. \
 For Ubuntu users, the following command will ensure you have all the right repositories and tools. \
-For users of other distributions, consult your specific distro documentation. \
-to install the `apcalc sgdisk hdparm dd losetup mdadm` packages.
+For users of other distributions, consult your specific distro documentation.
 
 ```
 sudo apt-add-repository universe
@@ -23,7 +22,7 @@ for DISK in /dev/sd[defghijk]; do sgdisk -t 1:8300 ${DISK}; done
 
 Next we will put a btrfs filesystem on each new partition. \
 I chose btrfs for the data checksumming feature. \
-Scrubbing the disk regularly will allow us to prematurely identify issues that can be resolved. \
+[Scrubbing](https://github.com/Fullaxx/microraids/blob/master/CHECK_EXAMPLE.md) the disk regularly will allow us to prematurely identify issues that can be resolved. \
 We will assign a label to each filesystem that matches the serial number of the drive. \
 Then we will create a mountpoint and a mapping file that will be used by other scripts later.
 ```
@@ -37,7 +36,7 @@ done
 ```
 
 Assigning the FS labels that match serial numbers will allow us to easily group our disks by function. \
-You can use `ls -l /dev/disk/by-label` to see how the labels are mapped to your disks.
+Use `ls -l /dev/disk/by-label` to see how the labels are mapped to your disks.
 
 ```
 ls -l /dev/disk/by-label/
