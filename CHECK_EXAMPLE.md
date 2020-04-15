@@ -23,7 +23,7 @@ Rate:             170.67KiB/s
 Error summary:    no errors found
 ```
 
-## MDADM Checking
+## RAID Checking
 Another way to check your microraid is to ask the kernel to run an integrity check for you. \
 This command can be given to each raid individually.
 ```bash
