@@ -3,11 +3,12 @@ First we need to make sure we have all the appropriate tools. \
 Please consult this chart for help with installing the required packages. \
 If your OS is not listed, please help us fill out the table, or submit a request via github.
 
-| Operating System      | Commands (as root)                                                  |
-| --------------------- | ------------------------------------------------------------------- |
-| Ubuntu                | `apt-add-repository universe; apt update; apt install apcalc mdadm` |
-| CentOS                | `yum install -y epel-release; yum install -y calc mdadm`            |
-| Fedora                | `yum install -y calc mdadm`                                         |
+| Operating System   | Commands (as root)                                                       |
+| ------------------ | ------------------------------------------------------------------------ |
+| Debian             | `apt update; apt install --no-install-recommends -y apcalc hdparm mdadm` |
+| Ubuntu             | `apt-add-repository universe; apt update; apt install apcalc mdadm`      |
+| CentOS             | `yum install -y epel-release; yum install -y calc hdparm mdadm`          |
+| Fedora             | `yum install -y calc hdparm mdadm`                                       |
 
 ## Disk Partitioning
 In this example we will start with 8 blank disks. \
