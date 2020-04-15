@@ -1,6 +1,6 @@
 btrfs will by default checksum your data blocks. \
 Using the scrub feature, we can validate that there are no problems with any data blocks currently storing data. \
-To validate a single filesystem, do the following
+To validate a single filesystem, do the following (replacing `/mnt/VAHAW81L` with a mounted btrfs)
 ```
 btrfs scrub start /mnt/VAHAW81L
 btrfs scrub status /mnt/VAHAW81L
