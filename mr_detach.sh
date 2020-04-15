@@ -58,7 +58,7 @@ if [ "${RAIDCOUNT}" != "0" ]; then
   exit 5
 fi
 
-echo; echo -n "Detach? (y/N): "
+echo; echo -n "Detach the Loops? (y/N): "
 read ANS
 
 # Why can't I use -a here on ubuntu??
