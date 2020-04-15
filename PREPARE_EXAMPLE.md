@@ -39,7 +39,7 @@ for DISK in /dev/sd[defghijk]; do
 done
 ```
 
-## More Info
+## Disks, Partitions, and Labels
 Assigning the FS labels that match serial numbers will allow us to easily group our disks by function. \
 Use `ls -l /dev/disk/by-label` to see how the labels are mapped to your disks.
 
