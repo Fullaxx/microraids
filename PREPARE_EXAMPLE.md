@@ -1,12 +1,11 @@
 First we need to make sure we have all the appropriate tools. \
-For Ubuntu users, the following command will ensure you have all the right repositories and tools. \
-For users of other distributions, consult your specific distro documentation.
+Please consult this chart for help with installing the required packages. \
+If your OS is not listed, please help us fill out the table, or submit a request via github.
 
-```
-sudo apt-add-repository universe
-sudo apt update
-sudo apt install apcalc mdadm
-```
+| Operating System      | Commands (as root)                                                  |
+| --------------------- | ------------------------------------------------------------------- |
+| Ubuntu                | `apt-add-repository universe; apt update; apt install apcalc mdadm` |
+| CentOS                | `yum install -y epel-release; yum install -y calc mdadm`            |
 
 In this example we will start with 8 blank disks. \
 Lets assume that we want to ignore disks sda, sdb, and sdc. \
