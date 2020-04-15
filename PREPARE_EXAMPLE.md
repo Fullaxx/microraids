@@ -21,10 +21,10 @@ for DISK in /dev/sd[defghijk]; do sgdisk -t 1:8300 ${DISK}; done
 ```
 
 Next we will put a btrfs filesystem on each new partition. \
-I chose btrfs for the data checksumming feature. \
+I chose btrfs because it supports checksumming of data blocks via the scrub command. \
 [Scrubbing](https://github.com/Fullaxx/microraids/blob/master/CHECK_EXAMPLE.md) the disk regularly will allow us to prematurely identify issues that can be resolved. \
 We will assign a label to each filesystem that matches the serial number of the drive. \
-Then we will create a mountpoint and a mapping file that will be used by other scripts later.
+The last line of the for loop will create the map file. This will be used by other scripts.
 ```
 for DISK in /dev/sd[defghijk]; do
   PART="${DISK}1"
