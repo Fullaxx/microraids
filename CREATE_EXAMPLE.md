@@ -1,5 +1,5 @@
 ## Locations Map
-After preperation, you should have a locataions map. \
+After preperation, you should have a locations map. \
 This is a txt file that tells the create script where to place each disk image. \
 I have 8 disks, so I have 8 locations. Each image will be on a seperate physical disk.
 ```bash
