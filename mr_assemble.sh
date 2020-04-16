@@ -19,6 +19,8 @@ if [ "$?" != "0" ]; then
   exit 3
 fi
 
+# Loop all our images and create an array upon success
+# The array of loop devices will be assembled into a raid device
 INDEX="0"
 declare -a loop_array
 while [ -n "$1" ]; do
@@ -35,6 +37,7 @@ echo "Loop Devices: ${loop_array[@]}"
 # Wait for the kernel to autodetect the raid on the loops
 sleep 2
 
+# Look for the new device under /dev/md/
 FIRSTDEV=`basename ${loop_array[0]}`
 NEWRAID=`cat /proc/mdstat | grep ${FIRSTDEV} | awk '{print $1}'`
 if [ -n "${NEWRAID}" ]; then
@@ -47,6 +50,6 @@ if [ -n "${NEWRAID}" ]; then
   done
 fi
 
-# DEVICE NOT FOUND
+# NO NEW DEVICES FOUND
 echo "No new raid devices found under /dev/md/"
 exit 9
