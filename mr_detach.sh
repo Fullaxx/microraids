@@ -28,6 +28,8 @@ fi
 
 echo "Searching for ${NAME} ..."; echo
 
+# Make sure that none of the loop device are still assembled in any raid device
+# We want to make sure they are completely dormant before we detach them
 INDEX="0"
 RAIDCOUNT="0"
 declare -a loop_array
@@ -47,8 +49,10 @@ while read -r LINE; do
   fi
 done < ${MAP}
 
+# If INDEX equals 0, we found no loop devices related to ${NAME}
+# If ${NAME} is not active, we could exit 0 here?
 if [ "${INDEX}" == "0" ]; then
-  echo "${NAME} does not appear to be in use"
+  echo "${NAME} does not appear to be active"
   exit 4
 fi
 
