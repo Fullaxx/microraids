@@ -33,8 +33,8 @@ if [ ! -x ${DETACHSCRIPT} ]; then
   exit 5
 fi
 
+# Walk through each disk image and find the raid device that is in use
 INDEX="0"
-# declare -a rimg_array
 while read -r LINE; do
   RIMG=${LINE}/${NAME}/${NAME}.?.rimg
   LOOP=`losetup -a | grep ${RIMG} | cut -d: -f1`
