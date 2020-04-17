@@ -28,6 +28,8 @@ BTOG="1000000000"
 SRC="if=/dev/zero"
 BS="4096"
 
+# Use the raid level to determine the number of missing disks in the raid
+# This will be used for available space calculations
 if [ "${RL}" == "6" ]; then
   MD="2"
 elif [ "${RL}" == "5" ]; then
