@@ -47,14 +47,17 @@ if [ ! -r "${MAP}" ]; then
   exit 4
 fi
 
-declare -a map_array
+# Read in the MAP file into an array
+# These will be the locations of our disk images
 INDEX="0"
+declare -a map_array
 while read -r LINE; do
   map_array[${INDEX}]="${LINE}"
   INDEX=$(( INDEX+1 ))
 done < ${MAP}
 # echo "INDEX: ${INDEX}"
 
+# Check to make sure we have the correct amount of locations
 if [ "${INDEX}" != "${NUMDEV}" ]; then
   echo "INDEX(${INDEX}) != NUMDEV(${NUMDEV})"
   exit 5
@@ -88,6 +91,7 @@ echo "Creating Images: ${NUMDEV} * ${IMGSIZEG}G each = ${SPARSESIZEG}G"
 echo "Creating raid${RL} /dev/md/${RAIDNAME}: ${RAIDSIZEG}G [${BYTECOUNT} B]"
 echo "Continue? (y/N)"
 read ANS
+echo
 
 # Why can't I use -a here on ubuntu??
 if [ "${ANS}" != "y" ] && [ "${ANS}" != "Y" ]; then
@@ -95,11 +99,13 @@ if [ "${ANS}" != "y" ] && [ "${ANS}" != "Y" ]; then
   exit 0
 fi
 
+
+# Use all the values provided to make our disk images
+# While creating disk images, write out steps to our LOG file
+# For each disk image, LOOP them with losetup so they can be assembled into a raid device
+INDEX="0"
 declare -a file_array
 declare -a loop_array
-
-echo
-INDEX="0"
 echo "$0 $@" >> ${LOG}
 echo >> ${LOG}
 while [ ${INDEX} -ne ${NUMDEV} ]; do
@@ -122,13 +128,13 @@ echo >> ${LOG}
 echo ${file_array[@]}
 echo ${loop_array[@]}
 
-# CREATE RAID
+# Assemble our raid device from the LOOP devices
 ${MDBIN} -C /dev/md/${RAIDNAME} -l ${RL} -n ${NUMDEV} -c ${CHUNK} ${loop_array[@]}
 echo "mdadm -C /dev/md/${RAIDNAME} -l ${RL} -n ${NUMDEV} -c ${CHUNK} ${loop_array[@]}" >> ${LOG}
 echo >> ${LOG}
 echo "/dev/md/${RAIDNAME} is ready!"
 
-# PRINT MAP
+# Update the log file
 INDEX="0"
 while [ ${INDEX} -ne ${NUMDEV} ]; do
   echo "${file_array[${INDEX}]}: ${loop_array[${INDEX}]}" >> ${LOG}
