@@ -26,7 +26,7 @@ if [ "$?" != "0" ]; then
   exit 4
 fi
 
-echo "Searching for ${NAME} ..."; echo
+echo "Searching for ${NAME} ..."
 
 # Make sure that none of the loop device are still assembled in any raid device
 # We want to make sure they are completely dormant before we detach them
@@ -48,6 +48,7 @@ while read -r LINE; do
     INDEX=$(( INDEX+1 ))
   fi
 done < ${MAP}
+echo
 
 # If INDEX equals 0, we found no loop devices related to ${NAME}
 # If ${NAME} is not active, we could exit 0 here?
@@ -58,17 +59,8 @@ fi
 
 # RAIDCOUNT should equal zero b/c the raid should have been dismantled by now
 if [ "${RAIDCOUNT}" != "0" ]; then
-  echo; echo "Cowardly refusing to continue!"
+  echo "Cowardly refusing to continue!"
   exit 5
-fi
-
-echo; echo -n "Detach the Loops? (y/N): "
-read ANS
-
-# Why can't I use -a here on ubuntu??
-if [ "${ANS}" != "y" ] && [ "${ANS}" != "Y" ]; then
-  echo "I will not touch your precious loops."
-  exit 0
 fi
 
 # echo "${loop_array[@]}"

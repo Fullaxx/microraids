@@ -3,8 +3,7 @@ If you have just gone through the [Create Example](https://github.com/Fullaxx/mi
 If it is currently mounted, make sure to umount it. \
 `umount /dev/md/mynewraid` or `umount /mnt/mynewraid` should do the trick. \
 Once the microraid is unmounted, you can stop it using the mr_stop.sh script. \
-You will need to provide 2 argurments to mr_stop.sh: the name of your microraid and the map file. \
-If all goes well, it will ask you if you want to "Detach the Loops". Press y and Enter.
+You will need to provide 2 argurments to mr_stop.sh: the name of your microraid and the map file.
 ```bash
 ./mr_stop.sh: <NAME> <MAP>
 

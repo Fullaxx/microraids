@@ -33,40 +33,76 @@ if [ ! -x ${DETACHSCRIPT} ]; then
   exit 5
 fi
 
-# Walk through each disk image and find the raid device that is in use
+# Walk through each disk image, finding loop devices and raid device (if active)
 INDEX="0"
+declare -a dimg_array
+declare -a loop_array
+declare -a raid_array
 while read -r LINE; do
-  RIMG=${LINE}/${NAME}/${NAME}.?.rimg
-  LOOP=`losetup -a | grep ${RIMG} | cut -d: -f1`
+  DIMG=`ls -1 ${LINE}/${NAME}/${NAME}.?.rimg`
+  if [ ! -r "${DIMG}" ]; then
+    echo "Could not find disk images for ${NAME} using this map!"
+    exit 6
+  fi
+  dimg_array[${INDEX}]="${DIMG}"
+  LOOP=`losetup -a | grep ${DIMG} | cut -d: -f1`
   if [ -n "${LOOP}" ]; then
+    loop_array[${INDEX}]="${LOOP}"
     BN=`basename ${LOOP}`
     RD=`grep -w ${BN} /proc/mdstat | awk '{print $1}'`
-
-    if [ "${INDEX}" == "0" ]; then
-      MD="${RD}"
-    elif [ "${RD}" != "${MD}" ]; then
-      echo "${RD} does not match ${MD}!"; exit 6
+    if [ -n "${RD}" ]; then
+      raid_array[${INDEX}]="${RD}"
     fi
-    INDEX=$(( INDEX+1 ))
   fi
+  INDEX=$(( INDEX+1 ))
 done < ${MAP}
 
-if [ "${INDEX}" == "0" ]; then
-  echo "${NAME} does not appear to be in use"
+# echo "dimg_array: ${dimg_array[@]}"
+# echo "loop_array: ${loop_array[@]}"
+# echo "raid_array: ${raid_array[@]}"
+# echo "INDEX: ${INDEX}"
+
+# If ${NAME} has no loops, we are done here
+if [ "${#loop_array[@]}" == "0" ]; then
+  echo "${NAME} has no loops active"
+  exit 0
+fi
+
+# If the LOOP count doesn't match the DIMG count, we have a problem
+if [ "${#loop_array[@]}" != "${#dimg_array[@]}" ]; then
+  echo "Expected ${#dimg_array[@]} loop devices, only found ${#loop_array[@]}!"
   exit 7
 fi
 
-RAIDDEV="/dev/${MD}"
-if [ ! -b ${RAIDDEV} ]; then
-  echo "${RAIDDEV} is not a block device!"
+# If we have no active raid, we can skip to detach.sh
+if [ "${#raid_array[@]}" == "0" ]; then
+  echo "${NAME} has no assembled raid, jumping to detach"
+  ${DETACHSCRIPT} ${NAME} ${MAP}
+  exit $?
+fi
+
+# Check to make sure we are about to stop the correct raid device
+UNIQUERAIDCOUNT=`echo "${raid_array[@]}" | xargs -n1 echo | sort -u | wc -l`
+if [ "${UNIQUERAIDCOUNT}" != "1" ]; then
+  echo "${NAME} appears to be attached to multiple devices?"
+  echo "${raid_array[@]}"
   exit 8
 fi
 
-if mount | grep -q ${RAIDDEV}; then
-  echo "${RAIDDEV} appears to be mounted!"
+MD=${raid_array[0]}
+RAIDDEV="/dev/${MD}"
+if [ ! -b ${RAIDDEV} ]; then
+  echo "${RAIDDEV} is not a block device!"
   exit 9
 fi
 
+# if our raid device is mounted, DO NOT try and stop the raid
+if mount | grep -q ${RAIDDEV}; then
+  echo "${RAIDDEV} appears to be mounted!"
+  exit 10
+fi
+
+# Whew, we finally got here
 echo "Stopping ${RAIDDEV} ..."
 ${MDBIN} -S ${RAIDDEV}
 echo
