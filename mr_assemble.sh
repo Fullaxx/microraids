@@ -32,9 +32,10 @@ while [ -n "$1" ]; do
 done
 
 echo
-echo "Loop Devices: ${loop_array[@]}"
+# echo "Loop Devices: ${loop_array[@]}"
 
 # Wait for the kernel to autodetect the raid on the loops
+echo "Sleeping 2 seconds for kernel auto-detect ..."
 sleep 2
 
 # Look for new raid device under /dev/md/
