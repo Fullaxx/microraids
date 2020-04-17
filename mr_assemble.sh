@@ -37,13 +37,13 @@ echo "Loop Devices: ${loop_array[@]}"
 # Wait for the kernel to autodetect the raid on the loops
 sleep 2
 
-# Look for the new device under /dev/md/
+# Look for new raid device under /dev/md/
 FIRSTDEV=`basename ${loop_array[0]}`
-NEWRAID=`cat /proc/mdstat | grep ${FIRSTDEV} | awk '{print $1}'`
+NEWRAID=`cat /proc/mdstat | grep -w ${FIRSTDEV} | awk '{print $1}'`
 if [ -n "${NEWRAID}" ]; then
   for DEV in /dev/md/*; do
     RP=`realpath ${DEV}`
-    if [ "$RP" == "/dev/${NEWRAID}" ]; then
+    if [ "${RP}" == "/dev/${NEWRAID}" ]; then
       echo "${DEV} is ready!"
       exit 0
     fi
