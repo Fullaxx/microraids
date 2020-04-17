@@ -40,7 +40,7 @@ while read -r LINE; do
   LOOP=`losetup -a | grep ${RIMG} | cut -d: -f1`
   if [ -n "${LOOP}" ]; then
     BN=`basename ${LOOP}`
-    RD=`grep ${BN} /proc/mdstat | cut -d: -f1`
+    RD=`grep -w ${BN} /proc/mdstat | awk '{print $1}'`
 
     if [ "${INDEX}" == "0" ]; then
       MD="${RD}"

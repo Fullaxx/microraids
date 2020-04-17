@@ -39,7 +39,7 @@ sleep 2
 
 # Look for new raid device under /dev/md/
 FIRSTDEV=`basename ${loop_array[0]}`
-NEWRAID=`cat /proc/mdstat | grep -w ${FIRSTDEV} | awk '{print $1}'`
+NEWRAID=`grep -w ${FIRSTDEV} /proc/mdstat | awk '{print $1}'`
 if [ -n "${NEWRAID}" ]; then
   for DEV in /dev/md/*; do
     RP=`realpath ${DEV}`

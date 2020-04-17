@@ -40,7 +40,7 @@ while read -r LINE; do
   if [ -n "${LOOP}" ]; then
     loop_array[${INDEX}]="${LOOP}"
     BN=`basename ${LOOP}`
-    RD=`grep ${BN} /proc/mdstat | cut -d: -f1`
+    RD=`grep ${BN} /proc/mdstat | awk '{print $1}'`
     if [ -n "${RD}" ] ; then
       echo "${LOOP} appears to be attached to ${RD}..."
       RAIDCOUNT=$(( RAIDCOUNT + 1))
