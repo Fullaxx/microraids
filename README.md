@@ -37,7 +37,7 @@ Also each microraid can be checked independently for integrity and consistency i
 * [Slackware](http://www.slackware.com/)
 * [Ubuntu Server](https://ubuntu.com/)
 
-### My Hardware Setup
+### My Mini-ITX Setup
 * [Cooler Master Elite 110 RC-110-KKN2](https://www.amazon.com/dp/B00ID2FBU6)
 * [ASRock J4105B-ITX](https://www.asrock.com/mb/Intel/J4105B-ITX/index.us.asp)
 * [Ableconn PEX-SA130](https://www.amazon.com/dp/B07595M2MK) supports 2x Port Multiplier
