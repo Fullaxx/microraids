@@ -45,6 +45,7 @@ if [ -n "${NEWRAID}" ]; then
   for DEV in /dev/md/*; do
     RP=`realpath ${DEV}`
     if [ "${RP}" == "/dev/${NEWRAID}" ]; then
+      grep ${NEWRAID} /proc/mdstat
       echo "${DEV} is ready!"
       exit 0
     fi
