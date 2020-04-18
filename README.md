@@ -22,6 +22,12 @@ even though they are stored on the same set of physical disks.
 microraids gives the flexibility to have any number of RAID 0/1/5/6 arrays as long as available drive space will allow it. 
 Also each microraid can be checked independently for integrity and consistency in multiple ways. 
 
+### Advantages
+* Disk Capacities do not have to match
+* Integrity issues can be identified before recovery
+* Recovery percentages are significantly increased
+* You can put multiple raid types (i.e. 6/5/1/0) on the same disk
+
 ### Required Software
 * [calc](https://sourceforge.net/projects/calc/)
 * Standard Utilities: sgdisk / hdparm / dd / losetup / mdadm
