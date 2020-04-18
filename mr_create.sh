@@ -32,6 +32,7 @@ BS="4096"
 # This will be used for available space calculations
 if [ "${RL}" == "6" ]; then; MD="2"
 elif [ "${RL}" == "5" ]; then; MD="1"
+elif [ "${RL}" == "4" ]; then; MD="1"
 elif [ "${RL}" == "1" ]; then; MD="1"
 elif [ "${RL}" == "0" ]; then; MD="0"
 else
