@@ -47,7 +47,7 @@ Also each microraid can be checked independently for integrity and consistency i
 * [Cooler Master Elite 110](https://www.coolermaster.com/catalog/cases/mini-itx/elite110/)
 * [ASRock J4105B-ITX](https://www.asrock.com/mb/Intel/J4105B-ITX/index.us.asp)
 * [Ableconn PEX-SA130](https://www.amazon.com/dp/B07595M2MK) supports 2x Port Multiplier
-* 2x [Mediasonic ProBox HF2-SU3S2](https://www.amazon.com/dp/B003X26VV4) connected via eSATA
+* 2x [Mediasonic ProBox HF2-SU3S2](https://www.amazon.com/dp/B003X26VV4) connects 4x 3.5" drives via eSATA
 * Initially I chose 8x [4TB HGST Ultrastar 7K4000 REFURB](https://www.amazon.com/dp/B0856WZT3B/) for testing
 
 ### Alternate Hardware
