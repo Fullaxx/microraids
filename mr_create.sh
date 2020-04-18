@@ -30,17 +30,12 @@ BS="4096"
 
 # Use the raid level to determine the number of missing disks in the raid
 # This will be used for available space calculations
-if [ "${RL}" == "6" ]; then
-  MD="2"
-elif [ "${RL}" == "5" ]; then
-  MD="1"
-elif [ "${RL}" == "1" ]; then
-  MD="1"
-elif [ "${RL}" == "0" ]; then
-  MD="0"
+if [ "${RL}" == "6" ]; then; MD="2"
+elif [ "${RL}" == "5" ]; then; MD="1"
+elif [ "${RL}" == "1" ]; then; MD="1"
+elif [ "${RL}" == "0" ]; then; MD="0"
 else
-  MD="0"
-  echo "RL: ${RL} Unsupported!"
+  echo "RAID ${RL} is not supported!"
   exit 3
 fi
 
