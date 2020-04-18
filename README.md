@@ -23,9 +23,9 @@ microraids gives the flexibility to have any number of RAID 0/1/5/6 arrays as lo
 Also each microraid can be checked independently for integrity and consistency in multiple ways. 
 
 ### Advantages
-* Disk Capacities do not have to match
+* Disk capacities do not have to match
 * Integrity issues can be identified before recovery
-* Recovery percentages are significantly increased
+* Recovery probabilities are significantly increased
 * You can put multiple raid types (i.e. 0/1/5/6) on the same disk
 
 ### Required Software
