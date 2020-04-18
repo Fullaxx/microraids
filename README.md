@@ -10,7 +10,7 @@ up until the point a new disk could be inserted and replace the bad disk.
 From that perspective, the RAID system was very reliable. 
 Fast-Forward to today where 8TB drives are ubiquitous and the probability 
 of doing a RAID5 recovery a 9x8TB array is between [0.3% and 56.2%](http://www.raid-failure.com/raid5-failure.aspx). 
-I had to learn about URE percentages the hard way, so here we are. 
+I had to learn about URE percentages the hard way, so here we are. \
 I propose that the fundamentals of RAID are still good (including the software), 
 but doing a full recovery on a LARGE array is no longer a realistic option 
 given the bit error rates of current drives (i.e. RAID5 on a 72TB array). 
