@@ -36,6 +36,7 @@ for DISK in /dev/sd[defghijk]; do
   LABEL=$(hdparm -I ${DISK} | grep 'Serial Number:' | awk '{print $3}')
   mkfs.btrfs -f -L ${LABEL} ${PART}
   mkdir -p /mnt/${LABEL}
+  mount ${PART} /mnt/${LABEL} -t btrfs
   echo "/mnt/${LABEL}" >> mnt_locations.map
 done
 ```
