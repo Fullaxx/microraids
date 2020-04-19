@@ -1,3 +1,14 @@
+## List Your Microraids
+mr_list.sh will give you a listing of all your microraids, given a map file.
+```bash
+./mr_list.sh: <MAP>
+
+./mr_list.sh mnt_locations.map
+mynewraid
+mydata
+mymirror
+```
+
 ## Stop Your Microraid
 If you have just gone through the [Create Example](https://github.com/Fullaxx/microraids/blob/master/CREATE_EXAMPLE.md), you should have a running microraid. \
 If it is currently mounted, make sure to umount it. \
