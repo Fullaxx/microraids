@@ -72,3 +72,12 @@ mount
 /dev/sde1 on /mnt/VAJGDMHL type btrfs (rw)
 /dev/sdk1 on /mnt/VAJHDMHL type btrfs (rw)
 ```
+
+I use a script like this to ensure that my disks get mounted in the same place every startup. \
+```bash
+for PART in /dev/disk/by-label/PV[ABCD]??????; do
+  SERIAL=`basename ${PART}`
+  mkdir -p /mnt/${SERIAL}
+  mount ${PART} /mnt/${SERIAL} -t btrfs -o rw,nosuid,nodev,noatime,nodiratime
+done
+```
