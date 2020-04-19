@@ -27,6 +27,7 @@ for DISK in /dev/sd[defghijk]; do sgdisk -t 1:8300 ${DISK}; done
 Next we will put a btrfs filesystem on each new partition. \
 I chose btrfs because it supports checksumming of data blocks via the scrub command. \
 [Scrubbing](https://github.com/Fullaxx/microraids/blob/master/CHECK_EXAMPLE.md) the disk regularly will allow us to prematurely identify issues that can be resolved. \
+NOTE: We will *NOT* be using the (btrfs-raid)[https://btrfs.wiki.kernel.org/index.php/RAID56] feature, but just a generic btrfs filesystem on individual partitions. \
 We will assign a label to each filesystem that matches the serial number of the drive. \
 The last line of the for loop will create the map file. This will be used by other scripts.
 ```bash
