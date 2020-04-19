@@ -4,14 +4,14 @@ This text file is a list of mount points that describe where to place/find each 
 I have 8 disks, so I have 8 mounted partitions. Each image will be on a seperate physical disk.
 ```bash
 cat mnt_locations.map
-/mnt/VAHAW81L
-/mnt/VAHBY2ML
-/mnt/VAHC5NWL
-/mnt/VAJDV17L
-/mnt/VAJELEPL
-/mnt/VAJFPNDL
-/mnt/VAJGDMHL
-/mnt/VAJHDMHL
+/mnt/VAJ7LEPL
+/mnt/VAJDDMHL
+/mnt/VAJBPNDL
+/mnt/VDG04BHK
+/mnt/VAHJW81L
+/mnt/VAJ0V17L
+/mnt/VAHKY2ML
+/mnt/VAHX5NWL
 ```
 
 ## Create
@@ -39,14 +39,14 @@ md125 : active raid6 loop35[7] loop34[6] loop33[5] loop32[4] loop31[3] loop30[2]
 These are the disk images that make up your raid6 array
 ```bash
 ls -lh /mnt/*/mynewraid/*.rimg
--rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/VAHAW81L/mynewraid/mynewraid.1.rimg
--rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/VAHC5NWL/mynewraid/mynewraid.3.rimg
--rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/VAJDV17L/mynewraid/mynewraid.4.rimg
--rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/VAJHDMHL/mynewraid/mynewraid.8.rimg
--rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/VAJELEPL/mynewraid/mynewraid.5.rimg
--rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/VAJFPNDL/mynewraid/mynewraid.6.rimg
--rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/VAJGDMHL/mynewraid/mynewraid.7.rimg
--rw-r--r-- 1 root root 46G Apr 12 17:41 /mnt/VAHBY2ML/mynewraid/mynewraid.2.rimg
+-rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VAHJW81L/mynewraid/mynewraid.5.rimg
+-rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VAHKY2ML/mynewraid/mynewraid.7.rimg
+-rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VAHX5NWL/mynewraid/mynewraid.8.rimg
+-rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VAJ0V17L/mynewraid/mynewraid.6.rimg
+-rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VAJ7LEPL/mynewraid/mynewraid.1.rimg
+-rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VAJBPNDL/mynewraid/mynewraid.3.rimg
+-rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VAJDDMHL/mynewraid/mynewraid.2.rimg
+-rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VDG04BHK/mynewraid/mynewraid.4.rimg
 ```
 
 ## Filesystem and Mounting
