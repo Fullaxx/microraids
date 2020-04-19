@@ -19,14 +19,14 @@ This will keep the recovery percentages very high for each array.
 Each microraid is backed by a set of disk images, placed anywhere on any disk. 
 For each microraid you can choose a different level of redundancy, 
 even though they are stored on the same set of physical disks. 
-microraids gives the flexibility to have any number of RAID 0/1/5/6 arrays as long as available drive space will allow it. 
+microraids gives the flexibility to have any number of RAID 0/1/4/5/6 arrays as long as available drive space will allow it. 
 Also each microraid can be checked independently for integrity and consistency in multiple ways. 
 
 ### Advantages
 * Disk capacities do not have to match
 * Integrity issues can be identified before recovery
 * Recovery probabilities are significantly increased
-* You can put multiple raid types (i.e. 0/1/5/6) on the same disk
+* You can put multiple raid types (i.e. 0/1/4/5/6) on the same disk
 
 ### Required Software
 * [calc](https://sourceforge.net/projects/calc/)
