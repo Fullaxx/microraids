@@ -1,7 +1,5 @@
 #!/bin/bash
 
-SCRIPTDIR=`dirname $0`
-DETACHSCRIPT="${SCRIPTDIR}/mr_detach.sh"
 set -e
 
 if [ "$#" -ne "2" ]; then
@@ -28,11 +26,6 @@ if [ "$?" != "0" ]; then
   exit 4
 fi
 
-if [ ! -x ${DETACHSCRIPT} ]; then
-  echo "${DETACHSCRIPT} is not executable!"
-  exit 5
-fi
-
 # Walk through each disk image, finding loop devices and raid device (if active)
 INDEX="0"
 declare -a dimg_array
@@ -42,7 +35,7 @@ while read -r LINE; do
   DIMG=`ls -1 ${LINE}/${NAME}/${NAME}.?.rimg`
   if [ ! -r "${DIMG}" ]; then
     echo "Could not find disk images for ${NAME} using this map!"
-    exit 6
+    exit 5
   fi
   dimg_array[${INDEX}]="${DIMG}"
   LOOP=`losetup -a | grep ${DIMG} | cut -d: -f1`
@@ -64,8 +57,8 @@ done < ${MAP}
 
 # If ${NAME} has no loops, we are done here
 if [ "${#loop_array[@]}" == "0" ]; then
-  echo "${NAME} has no loops active"
-  exit 0
+  echo "${NAME} has no loops active!"
+  exit 6
 fi
 
 # If the LOOP count doesn't match the DIMG count, we have a problem
@@ -74,37 +67,26 @@ if [ "${#loop_array[@]}" != "${#dimg_array[@]}" ]; then
   exit 7
 fi
 
-# If we have no active raid, we can skip to detach.sh
+# If we have no active raid, we cannot get detailed information
 if [ "${#raid_array[@]}" == "0" ]; then
-  echo "${NAME} has no assembled raid, jumping to detach"
-  ${DETACHSCRIPT} ${NAME} ${MAP}
-  exit $?
+  echo "${NAME} has no assembled raid!"
+  exit 8
 fi
 
-# Check to make sure we are about to stop the correct raid device
+# Check to make sure we are about to detail the correct raid device
 UNIQUERAIDCOUNT=`echo "${raid_array[@]}" | xargs -n1 echo | sort -u | wc -l`
 if [ "${UNIQUERAIDCOUNT}" != "1" ]; then
   echo "${NAME} appears to be attached to multiple devices?"
   echo "${raid_array[@]}"
-  exit 8
+  exit 9
 fi
 
 MD=${raid_array[0]}
 RAIDDEV="/dev/${MD}"
 if [ ! -b ${RAIDDEV} ]; then
   echo "${RAIDDEV} is not a block device!"
-  exit 9
-fi
-
-# if our raid device is mounted, DO NOT try and stop the raid
-if mount | grep -q ${RAIDDEV}; then
-  echo "${RAIDDEV} appears to be mounted!"
   exit 10
 fi
 
 # Whew, we finally got here
-echo "Stopping ${RAIDDEV} ..."
-${MDBIN} -S ${RAIDDEV}
-echo
-
-${DETACHSCRIPT} ${NAME} ${MAP}
+${MDBIN} --detail ${RAIDDEV}

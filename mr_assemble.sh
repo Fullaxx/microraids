@@ -7,13 +7,13 @@ if [ `id -u` -ne "0" ]; then
   exit 1
 fi
 
-LOBIN=`PATH="/sbin:$PATH" which losetup`
+LOBIN=`PATH="/sbin:/usr/sbin:$PATH" which losetup`
 if [ "$?" != "0" ]; then
   echo "losetup not found!"
   exit 2
 fi
 
-MDBIN=`PATH="/sbin:$PATH" which mdadm`
+MDBIN=`PATH="/sbin:/usr/sbin:$PATH" which mdadm`
 if [ "$?" != "0" ]; then
   echo "mdadm not found!"
   exit 3

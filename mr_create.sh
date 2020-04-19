@@ -67,13 +67,13 @@ if [ "$?" != "0" ]; then
   exit 6
 fi
 
-LOBIN=`PATH="/sbin:$PATH" which losetup`
+LOBIN=`PATH="/sbin:/usr/sbin:$PATH" which losetup`
 if [ "$?" != "0" ]; then
   echo "Couldnt find losetup!"
   exit 7
 fi
 
-MDBIN=`PATH="/sbin:$PATH" which mdadm`
+MDBIN=`PATH="/sbin:/usr/sbin:$PATH" which mdadm`
 if [ "$?" != "0" ]; then
   echo "Couldnt find mdadm!"
   exit 8

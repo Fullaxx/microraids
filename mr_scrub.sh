@@ -25,7 +25,7 @@ if [ `id -u` -ne "0" ]; then
   exit 2
 fi
 
-BTFSBIN=`PATH="/sbin:$PATH" which btrfs`
+BTFSBIN=`PATH="/sbin:/usr/sbin:$PATH" which btrfs`
 if [ "$?" != "0" ]; then
   echo "Couldnt find btrfs!"
   exit 3

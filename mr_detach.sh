@@ -20,7 +20,7 @@ if [ ! -r ${MAP} ]; then
   exit 3
 fi
 
-LOBIN=`PATH="/sbin:$PATH" which losetup`
+LOBIN=`PATH="/sbin:/usr/sbin:$PATH" which losetup`
 if [ "$?" != "0" ]; then
   echo "losetup not found!"
   exit 4
