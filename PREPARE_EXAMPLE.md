@@ -42,6 +42,8 @@ done
 
 ## Disks, Partitions, and Labels
 Assigning the FS labels that match serial numbers will allow us to easily group our disks by function. \
+Also, there is no guarantee that these disks will be given the same drive letter every time at startup. \
+Mounting drives by serial ensures we get the expected results upon every startup. \
 Use `ls -l /dev/disk/by-label` to see how the labels are mapped to your disks.
 
 ```bash
