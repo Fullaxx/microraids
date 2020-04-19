@@ -51,7 +51,8 @@ ls -lh /mnt/*/mynewraid/*.rimg
 
 ## Filesystem and Mounting
 Create a filesystem and mount it. \
-[More Information](https://github.com/Fullaxx/microraids/blob/master/MKFS_EXAMPLE.md) regarding filesystem creation.
+[More Information](https://github.com/Fullaxx/microraids/blob/master/MKFS_EXAMPLE.md) regarding filesystem creation. \
+In most cases, I choose ext4 for my on-raid filesystem b/c of tools like zerofree and extundelete.
 ```bash
 mkfs.ext4 -vv -b4096 -m0 -O metadata_csum,64bit -T largefile4 /dev/md/mynewraid
 mkdir /mnt/mynewraid
