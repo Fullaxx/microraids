@@ -51,7 +51,7 @@ Also each microraid can be checked independently for integrity and consistency i
 * 2x [Mediasonic ProBox HF2-SU3S2](https://www.amazon.com/dp/B003X26VV4)
   - Each ProBox connects 4x 3.5" drives of any size via eSATA
 * 8x [4TB HGST Ultrastar 7K4000 REFURB](https://www.amazon.com/dp/B0856WZT3B/)
-  - Chosen to show reliability/recovery on very inexpensive hardware
+  - Chosen to show software reliability/recovery on very inexpensive hardware
 
 ### Alternate Hardware
 * [SYBA SI-PEX40072](https://www.sybausa.com/index.php?route=product/product&product_id=155)
