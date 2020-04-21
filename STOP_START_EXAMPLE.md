@@ -35,7 +35,7 @@ Found 8 loops active for neo:
 /dev/loop18: (/mnt/PBGAS33T/neo/neo.7.rimg)
 /dev/loop19: (/mnt/PBG0W71T/neo/neo.8.rimg)
 
-neo appears to be assembled into /dev/md127
+neo appears to be assembled into /dev/md/neo (/dev/md127)
 ```
 
 ## Stop Your Microraid

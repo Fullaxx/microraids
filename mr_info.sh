@@ -88,8 +88,22 @@ mr_info()
     exit 7
   fi
 
+# Does ${NAME} have a named raid device?
+  RAIDNAME="0"
   RAIDDEV="/dev/${raid_array[0]}"
-  echo "${NAME} appears to be assembled into ${RAIDDEV}"
+  for DEV in /dev/md/*; do
+    RP=`realpath ${DEV}`
+    if [ "${RP}" == "${RAIDDEV}" ]; then
+      RAIDNAME="${DEV}"
+    fi
+  done
+
+  if [ "${RAIDNAME}" != "0" ]; then
+    echo "${NAME} appears to be assembled into ${RAIDNAME} (${RAIDDEV})"
+  else
+    echo "${NAME} appears to be assembled into ${RAIDDEV}"
+  fi
+  grep -A1 -w "${raid_array[0]}" /proc/mdstat
 }
 
 set -e
