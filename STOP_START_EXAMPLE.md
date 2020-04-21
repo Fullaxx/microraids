@@ -1,12 +1,41 @@
 ## List Your Microraids
-mr_list.sh will give you a listing of all your microraids, given a map file.
+mr_info.sh will give you a listing of all your microraids, given a map file.
 ```bash
-./mr_list.sh: <MAP>
+./mr_info.sh: <MAP> [NAME]
 
-./mr_list.sh mnt_locations.map
+./mr_info.sh mnt_locations.map
 mynewraid
 mydata
-mymirror
+neo
+```
+
+## More Info
+mr_info.sh will give you detailed information, given a map file and a name.
+```bash
+./mr_info.sh: <MAP> [NAME]
+
+./mr_info.sh mnt_locations.map neo
+Found 8 disk images for neo:
+/mnt/PAGXKNDT/neo/neo.1.rimg
+/mnt/PCG4XHRB/neo/neo.2.rimg
+/mnt/PAJXH1LT/neo/neo.3.rimg
+/mnt/PAKY5VGT/neo/neo.4.rimg
+/mnt/PBG0XTDT/neo/neo.5.rimg
+/mnt/PBG0YBUT/neo/neo.6.rimg
+/mnt/PBGAS33T/neo/neo.7.rimg
+/mnt/PBG0W71T/neo/neo.8.rimg
+
+Found 8 loops active for neo:
+/dev/loop12: (/mnt/PAGXKNDT/neo/neo.1.rimg)
+/dev/loop13: (/mnt/PCG4XHRB/neo/neo.2.rimg)
+/dev/loop14: (/mnt/PAJXH1LT/neo/neo.3.rimg)
+/dev/loop15: (/mnt/PAKY5VGT/neo/neo.4.rimg)
+/dev/loop16: (/mnt/PBG0XTDT/neo/neo.5.rimg)
+/dev/loop17: (/mnt/PBG0YBUT/neo/neo.6.rimg)
+/dev/loop18: (/mnt/PBGAS33T/neo/neo.7.rimg)
+/dev/loop19: (/mnt/PBG0W71T/neo/neo.8.rimg)
+
+neo appears to be assembled into /dev/md127
 ```
 
 ## Stop Your Microraid
