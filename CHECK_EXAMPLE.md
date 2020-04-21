@@ -1,7 +1,8 @@
 ## BTRFS Scrubbing
 btrfs will by default checksum your data blocks. \
 Using the scrub feature, we can validate that there are no problems with any data blocks currently storing data. \
-To validate a single filesystem, do the following (replacing `/mnt/VAHAW81L` with a mounted btrfs)
+If any bad blocks are found under a disk image, you can just recover that image on other good sectors. \
+To validate a single filesystem, do the following (replacing `/mnt/VAHAW81L` with your mounted btrfs)
 ```bash
 btrfs scrub start /mnt/VAHAW81L
 btrfs scrub status /mnt/VAHAW81L
