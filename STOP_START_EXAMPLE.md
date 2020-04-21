@@ -9,7 +9,7 @@ mydata
 neo
 ```
 
-## More Info
+## Microraid In Detail
 mr_info.sh will give you detailed information, given a map file and a name.
 ```bash
 ./mr_info.sh: <MAP> [NAME]
