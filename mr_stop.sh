@@ -5,12 +5,12 @@ DETACHSCRIPT="${SCRIPTDIR}/mr_detach.sh"
 set -e
 
 if [ "$#" -ne "2" ]; then
-  echo "$0: <NAME> <MAP>"
+  echo "$0: <MAP> <NAME>"
   exit 1
 fi
 
-NAME="$1"
-MAP="$2"
+MAP="$1"
+NAME="$2"
 
 if [ `id -u` -ne "0" ]; then
   echo "Got Root?"

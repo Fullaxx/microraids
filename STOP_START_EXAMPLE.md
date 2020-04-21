@@ -14,22 +14,22 @@ If you have just gone through the [Create Example](https://github.com/Fullaxx/mi
 If it is currently mounted, make sure to umount it. \
 `umount /dev/md/mynewraid` or `umount /mnt/mynewraid` should do the trick. \
 Once the microraid is unmounted, you can stop it using the mr_stop.sh script. \
-You will need to provide 2 argurments to mr_stop.sh: the name of your microraid and the map file.
+You will need to provide 2 argurments to mr_stop.sh: the map file and the name of your microraid.
 ```bash
-./mr_stop.sh: <NAME> <MAP>
+./mr_stop.sh: <MAP> <NAME>
 
-./mr_stop.sh mynewraid mnt_locations.map
+./mr_stop.sh mnt_locations.map mynewraid
 
 TODO GIVE EXAMPLE OUTPUT HERE
 ```
 
 ## Start Your Microraid
 To run your microraid after it has been stopped, use the mr_start.sh script. \
-You will need to provide 2 argurments to mr_start.sh: the name of your microraid and the map file.
+You will need to provide 2 argurments to mr_start.sh: the map file and the name of your microraid.
 ```bash
-./mr_start.sh: <NAME> <MAP>
+./mr_start.sh: <MAP> <NAME>
 
-./mr_start.sh mynewraid mnt_locations.map
+./mr_start.sh mnt_locations.map mynewraid
 
 TODO GIVE EXAMPLE OUTPUT HERE
 ```
