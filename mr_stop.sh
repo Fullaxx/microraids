@@ -22,15 +22,21 @@ if [ ! -r ${MAP} ]; then
   exit 3
 fi
 
+LOBIN=`PATH="/sbin:/usr/sbin:$PATH" which losetup`
+if [ "$?" != "0" ]; then
+  echo "losetup not found!"
+  exit 4
+fi
+
 MDBIN=`PATH="/sbin:/usr/sbin:$PATH" which mdadm`
 if [ "$?" != "0" ]; then
   echo "mdadm not found!"
-  exit 4
+  exit 5
 fi
 
 if [ ! -x ${DETACHSCRIPT} ]; then
   echo "${DETACHSCRIPT} is not executable!"
-  exit 5
+  exit 6
 fi
 
 # Walk through each disk image, finding loop devices and raid device (if active)
@@ -42,10 +48,10 @@ while read -r LINE; do
   DIMG=`ls -1 ${LINE}/${NAME}/${NAME}.?.rimg`
   if [ ! -r "${DIMG}" ]; then
     echo "Could not find disk images for ${NAME} using this map!"
-    exit 6
+    exit 7
   fi
   dimg_array[${INDEX}]="${DIMG}"
-  LOOP=`losetup -a | grep ${DIMG} | cut -d: -f1`
+  LOOP=`${LOBIN} -a | grep ${DIMG} | cut -d: -f1`
   if [ -n "${LOOP}" ]; then
     loop_array[${INDEX}]="${LOOP}"
     BN=`basename ${LOOP}`
@@ -71,7 +77,7 @@ fi
 # If the LOOP count doesn't match the DIMG count, we have a problem
 if [ "${#loop_array[@]}" != "${#dimg_array[@]}" ]; then
   echo "Expected ${#dimg_array[@]} loop devices, only found ${#loop_array[@]}!"
-  exit 7
+  exit 8
 fi
 
 # If we have no active raid, we can skip to detach.sh
@@ -86,20 +92,20 @@ UNIQUERAIDCOUNT=`echo "${raid_array[@]}" | xargs -n1 echo | sort -u | wc -l`
 if [ "${UNIQUERAIDCOUNT}" != "1" ]; then
   echo "${NAME} appears to be attached to multiple devices?"
   echo "${raid_array[@]}"
-  exit 8
+  exit 9
 fi
 
 MD=${raid_array[0]}
 RAIDDEV="/dev/${MD}"
 if [ ! -b ${RAIDDEV} ]; then
   echo "${RAIDDEV} is not a block device!"
-  exit 9
+  exit 10
 fi
 
 # if our raid device is mounted, DO NOT try and stop the raid
 if mount | grep -q ${RAIDDEV}; then
   echo "${RAIDDEV} appears to be mounted!"
-  exit 10
+  exit 11
 fi
 
 # Whew, we finally got here
