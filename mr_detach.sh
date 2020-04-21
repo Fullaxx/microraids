@@ -35,8 +35,8 @@ RAIDCOUNT="0"
 declare -a loop_array
 while read -r LINE; do
   RIMG=${LINE}/${NAME}/${NAME}.?.rimg
-  losetup -a | grep ${RIMG}
-  LOOP=`losetup -a | grep ${RIMG} | cut -d: -f1`
+  ${LOBIN} -a | grep ${RIMG}
+  LOOP=`${LOBIN} -a | grep ${RIMG} | cut -d: -f1`
   if [ -n "${LOOP}" ]; then
     loop_array[${INDEX}]="${LOOP}"
     BN=`basename ${LOOP}`
