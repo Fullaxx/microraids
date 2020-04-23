@@ -61,8 +61,9 @@ if [ "${#loop_array[@]}" == "0" ]; then
   exit 6
 fi
 
-# If the LOOP count doesn't match the DIMG count, we have a problem
-if [ "${#loop_array[@]}" != "${#dimg_array[@]}" ]; then
+# If the LOOP is greater than the DIMG count, we have a problem
+# LOOP count can be less, in the case of a degraded array
+if [ "${#loop_array[@]}" -gt "${#dimg_array[@]}" ]; then
   echo "Expected ${#dimg_array[@]} loop devices, only found ${#loop_array[@]}!"
   exit 7
 fi
