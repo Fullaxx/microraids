@@ -83,7 +83,7 @@ fi
 # If we have no active raid, we can skip to detach.sh
 if [ "${#raid_array[@]}" == "0" ]; then
   echo "${NAME} has no assembled raid, jumping to detach"
-  ${DETACHSCRIPT} ${NAME} ${MAP}
+  ${DETACHSCRIPT} ${MAP} ${NAME}
   exit $?
 fi
 
@@ -113,4 +113,4 @@ echo "Stopping ${RAIDDEV} ..."
 ${MDBIN} -S ${RAIDDEV}
 echo
 
-${DETACHSCRIPT} ${NAME} ${MAP}
+${DETACHSCRIPT} ${MAP} ${NAME}
