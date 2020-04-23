@@ -40,7 +40,7 @@ mr_info()
       exit 6
     fi
     dimg_array[${INDEX}]="${DIMG}"
-    LOOP=`${LOBIN} -a | grep ${DIMG} | cut -d: -f1`
+    LOOP=`${LOBIN} -a | grep -w ${DIMG} | cut -d: -f1`
     if [ -n "${LOOP}" ]; then
       loop_array[${INDEX}]="${LOOP}"
       BN=`basename ${LOOP}`
@@ -69,7 +69,6 @@ mr_info()
 
   echo "Found ${#loop_array[@]} loops active for ${NAME}:"
   for LOOP in ${loop_array[@]}; do
-#    DI=`${LOBIN} -a | grep -w ${LOOP} | awk '{print $3}'`
     DI=`${LOBIN} -a | grep -w ${LOOP} | cut -d\( -f2 | cut -d\) -f1`
     echo -n "${LOOP}: ${DI}"; echo
   done
