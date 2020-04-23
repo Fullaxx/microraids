@@ -20,10 +20,16 @@ if [ ! -r ${MAP} ]; then
   exit 3
 fi
 
+LOBIN=`PATH="/sbin:/usr/sbin:$PATH" which losetup`
+if [ "$?" != "0" ]; then
+  echo "losetup not found!"
+  exit 4
+fi
+
 MDBIN=`PATH="/sbin:/usr/sbin:$PATH" which mdadm`
 if [ "$?" != "0" ]; then
   echo "mdadm not found!"
-  exit 4
+  exit 5
 fi
 
 # Walk through each disk image, finding loop devices and raid device (if active)
@@ -35,10 +41,10 @@ while read -r LINE; do
   DIMG=`ls -1 ${LINE}/${NAME}/${NAME}.?.rimg`
   if [ ! -r "${DIMG}" ]; then
     echo "Could not find disk images for ${NAME} using this map!"
-    exit 5
+    exit 6
   fi
   dimg_array[${INDEX}]="${DIMG}"
-  LOOP=`losetup -a | grep ${DIMG} | cut -d: -f1`
+  LOOP=`${LOBIN} -a | grep -w ${DIMG} | cut -d: -f1`
   if [ -n "${LOOP}" ]; then
     loop_array[${INDEX}]="${LOOP}"
     BN=`basename ${LOOP}`
@@ -58,20 +64,20 @@ done < ${MAP}
 # If ${NAME} has no loops, we are done here
 if [ "${#loop_array[@]}" == "0" ]; then
   echo "${NAME} has no loops active!"
-  exit 6
+  exit 7
 fi
 
 # If the LOOP is greater than the DIMG count, we have a problem
 # LOOP count can be less, in the case of a degraded array
 if [ "${#loop_array[@]}" -gt "${#dimg_array[@]}" ]; then
   echo "Expected ${#dimg_array[@]} loop devices, found ${#loop_array[@]}!"
-  exit 7
+  exit 8
 fi
 
 # If we have no active raid, we cannot get detailed information
 if [ "${#raid_array[@]}" == "0" ]; then
   echo "${NAME} has no assembled raid!"
-  exit 8
+  exit 9
 fi
 
 # Check to make sure we are about to detail the correct raid device
@@ -79,14 +85,14 @@ UNIQUERAIDCOUNT=`echo "${raid_array[@]}" | xargs -n1 echo | sort -u | wc -l`
 if [ "${UNIQUERAIDCOUNT}" != "1" ]; then
   echo "${NAME} appears to be attached to multiple devices?"
   echo "${raid_array[@]}"
-  exit 9
+  exit 10
 fi
 
 MD=${raid_array[0]}
 RAIDDEV="/dev/${MD}"
 if [ ! -b ${RAIDDEV} ]; then
   echo "${RAIDDEV} is not a block device!"
-  exit 10
+  exit 11
 fi
 
 # Whew, we finally got here
