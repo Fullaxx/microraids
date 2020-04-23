@@ -64,7 +64,7 @@ fi
 # If the LOOP is greater than the DIMG count, we have a problem
 # LOOP count can be less, in the case of a degraded array
 if [ "${#loop_array[@]}" -gt "${#dimg_array[@]}" ]; then
-  echo "Expected ${#dimg_array[@]} loop devices, only found ${#loop_array[@]}!"
+  echo "Expected ${#dimg_array[@]} loop devices, found ${#loop_array[@]}!"
   exit 7
 fi
 
