@@ -51,7 +51,7 @@ while read -r LINE; do
     exit 7
   fi
   dimg_array[${INDEX}]="${DIMG}"
-  LOOP=`${LOBIN} -a | grep ${DIMG} | cut -d: -f1`
+  LOOP=`${LOBIN} -a | grep -w ${DIMG} | cut -d: -f1`
   if [ -n "${LOOP}" ]; then
     loop_array[${INDEX}]="${LOOP}"
     BN=`basename ${LOOP}`
