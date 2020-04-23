@@ -35,22 +35,36 @@ if [ -b /dev/md/${NAME} ]; then
   exit 5
 fi
 
+LOBIN=`PATH="/sbin:/usr/sbin:$PATH" which losetup`
+if [ "$?" != "0" ]; then
+  echo "losetup not found!"
+  exit 6
+fi
+
 # For each mount location in the map file
 # Find the disk image that corresponds to the requested microraid ${NAME}
 INDEX="0"
-declare -a rimg_array
+declare -a dimg_array
 while read -r LINE; do
-  RIMG=${LINE}/${NAME}/${NAME}.?.rimg
-  if [ -r ${RIMG} ]; then 
-    rimg_array[${INDEX}]="${RIMG}"
-  else
-    echo "${RIMG} is not readable!"; exit 6
+  if [ ! -d ${LINE}/${NAME} ]; then
+    echo "${LINE}/${NAME} is not a directory!"; exit 7
   fi
+  DIMG=`ls -1 ${LINE}/${NAME}/${NAME}.?.rimg`
+  if [ -z "${DIMG}" ]; then
+    echo "${LINE}/${NAME}/${NAME}.?.rimg does not exist!"; exit 8
+  fi
+  if [ ! -r ${DIMG} ]; then
+    echo "${DIMG} is not readable!"; exit 9
+  fi
+  if ${LOBIN} -a | grep -qw ${DIMG}; then
+    echo "${DIMG} appears to be looped already!"; exit 10
+  fi
+  dimg_array[${INDEX}]="${DIMG}"
   INDEX=$(( INDEX+1 ))
 done < ${MAP}
 
 # Assemble all these images into a RAID device
-${ASSEMBLESCRIPT} ${rimg_array[@]}
+${ASSEMBLESCRIPT} ${dimg_array[@]}
 
 # IS THIS UNNECESSARY ??
 #if [ ! -b /dev/md/*${NAME} ]; then

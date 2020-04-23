@@ -34,9 +34,19 @@ INDEX="0"
 RAIDCOUNT="0"
 declare -a loop_array
 while read -r LINE; do
-  RIMG=${LINE}/${NAME}/${NAME}.?.rimg
-  ${LOBIN} -a | grep ${RIMG}
-  LOOP=`${LOBIN} -a | grep ${RIMG} | cut -d: -f1`
+  if [ ! -d ${LINE}/${NAME} ]; then
+    echo "${LINE}/${NAME} is not a directory!"; exit 5
+  fi
+  DIMG=`ls -1 ${LINE}/${NAME}/${NAME}.?.rimg`
+
+# Surround this with IF block so we don't bail early due to a missing image when array is degraded
+  if ${LOBIN} -a | grep -qw ${DIMG}; then
+    ${LOBIN} -a | grep -w ${DIMG}
+    LOOP=`${LOBIN} -a | grep -w ${DIMG} | cut -d: -f1`
+  else
+    LOOP=""
+  fi
+
   if [ -n "${LOOP}" ]; then
     loop_array[${INDEX}]="${LOOP}"
     BN=`basename ${LOOP}`
@@ -54,13 +64,13 @@ echo
 # If ${NAME} is not active, we could exit 0 here?
 if [ "${INDEX}" == "0" ]; then
   echo "${NAME} does not appear to be active"
-  exit 4
+  exit 6
 fi
 
 # RAIDCOUNT should equal zero b/c the raid should have been dismantled by now
 if [ "${RAIDCOUNT}" != "0" ]; then
-  echo "Cowardly refusing to continue!"
-  exit 5
+  echo "RAID appears to be active, Cowardly refusing to continue!"
+  exit 7
 fi
 
 # echo "${loop_array[@]}"
