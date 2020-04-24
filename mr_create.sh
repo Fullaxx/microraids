@@ -7,7 +7,7 @@
 set -e
 
 if [ "$#" -ne "6" ]; then
-  echo "$0: <RAIDNAME> <RAIDLEVEL> <NUMDEV> <CHUNKSIZE> <4k BLK CNT> <MAP>"
+  echo "$0: <MAP> <RAIDNAME> <RAIDLEVEL> <NUMDEV> <CHUNKSIZE> <4k BLK CNT>"
   exit 1
 fi
 
@@ -16,12 +16,12 @@ if [ `id -u` -ne "0" ]; then
   exit 2
 fi
 
-RAIDNAME="$1"
-RL="$2"
-NUMDEV="$3"
-CHUNK="$4"
-CNT="$5"
-MAP="$6"
+MAP="$1"
+RAIDNAME="$2"
+RL="$3"
+NUMDEV="$4"
+CHUNK="$5"
+CNT="$6"
 LOG="${RAIDNAME}.log"
 
 BTOG="1000000000"
