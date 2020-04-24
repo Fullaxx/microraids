@@ -14,6 +14,20 @@ cat mnt_locations.map
 /mnt/VAHX5NWL
 ```
 
+## Choosing a Size
+When creating a microraid, you will select the size by specifying the number of 4k blocks per image. \
+The formula will look like this: `SIZE in GB = (4096*BLOCKCOUNT)/(1e9)` \
+See the table below for help with selecting a block count. \
+| Block Count | Formula                 | Image Size |
+| ----------- | ----------------------- | ---------- |
+| 1000000     | =(4096*1000000)/(1e9)   | 4.096 GB   |
+| 2000000     | =(4096*2000000)/(1e9)   | 8.192 GB   |
+| 5000000     | =(4096*5000000)/(1e9)   | 20.48 GB   |
+| 10000000    | =(4096*10000000)/(1e9)  | 40.96 GB   |
+| 20000000    | =(4096*20000000)/(1e9)  | 81.92 GB   |
+| 50000000    | =(4096*50000000)/(1e9)  | 204.8 GB   |
+| 100000000   | =(4096*100000000)/(1e9) | 409.6 GB   |
+
 ## Create
 Next, use the map to create a raid6 with 256k chunk size spanning 8 disk images. \
 Each image will be 49.152G (4k*12000000) of physical disk space \
