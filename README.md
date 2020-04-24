@@ -42,7 +42,7 @@ Also each microraid can be checked independently for integrity and consistency i
 ### Tested Operating Systems
 * [RapidLinux](https://github.com/Fullaxx/RapidLinux)
 * [Slackware](http://www.slackware.com/)
-* [Ubuntu Server](https://ubuntu.com/)
+* [Ubuntu](https://ubuntu.com/)
 
 ### Simple Mini-ITX Setup
 * [Cooler Master Elite 110](https://www.coolermaster.com/catalog/cases/mini-itx/elite110/)
