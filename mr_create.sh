@@ -82,7 +82,11 @@ fi
 IMGSIZE=`${CALCBIN} "${BS}*${CNT}" | awk '{print $1}'`
 IMGSIZEG=`${CALCBIN} "${IMGSIZE}/${BTOG}" | awk '{print $1}'`
 SPARSESIZEG=`${CALCBIN} "${NUMDEV}*${IMGSIZE}/${BTOG}" | awk '{print $1}'`
-BYTECOUNT=`${CALCBIN} "${IMGSIZE}*(${NUMDEV}-${MD})" | awk '{print $1}'`
+if [ "${RL}" == "1" ]; then
+  BYTECOUNT=${IMGSIZE}
+else
+  BYTECOUNT=`${CALCBIN} "${IMGSIZE}*(${NUMDEV}-${MD})" | awk '{print $1}'`
+fi
 RAIDSIZEG=`${CALCBIN} "${BYTECOUNT}/${BTOG}" | awk '{print $1}'`
 
 echo "Creating Images: ${NUMDEV} * ${IMGSIZEG}G each = ${SPARSESIZEG}G"
