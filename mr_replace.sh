@@ -29,11 +29,26 @@ if [ ! -b ${RAIDDEV} ]; then
   exit 4
 fi
 
+MDBIN=`PATH="/sbin:/usr/sbin:$PATH" which mdadm`
+if [ "$?" != "0" ]; then
+  echo "mdadm not found!"
+  exit 5
+fi
+
 LOBIN=`PATH="/sbin:/usr/sbin:$PATH" which losetup`
 if [ "$?" != "0" ]; then
   echo "losetup not found!"
-  exit 5
+  exit 6
 fi
+
+RTYPE=`${MDBIN} --detail ${RAIDDEV} | grep 'Raid Level : ' | awk '{print $4}'`
+case "${RTYPE}" in
+  raid1) echo "${RAIDDEV} is ${RTYPE}";;
+  raid4) echo "${RAIDDEV} is ${RTYPE}";;
+  raid5) echo "${RAIDDEV} is ${RTYPE}";;
+  raid6) echo "${RAIDDEV} is ${RTYPE}";;
+      *) echo "${RTYPE} not supported!"; exit 7;;
+esac
 
 if [ -b "$4" ]; then
   LOOP="$4"
@@ -43,17 +58,17 @@ elif [ -f "$4" ]; then
   LOOP=`${LOBIN} -a | grep -w ${FDIMG} | cut -d: -f1`
 else
   echo "I dont know what to do with $4"
-  exit 6
+  exit 8
 fi
 
 if [ ! -b "${LOOP}" ]; then
   echo "${LOOP} is not a block device!"
-  exit 7
+  exit 9
 fi
 
 if [ ! -r "${FDIMG}" ]; then
   echo "${FDIMG} is not readable!"
-  exit 8
+  exit 10
 fi
 
 echo "Replacing Faulty Disk Image: ${FDIMG} (${LOOP}) ..."
