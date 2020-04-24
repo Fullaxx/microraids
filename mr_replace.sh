@@ -6,7 +6,7 @@ ADDSCRIPT="${SCRIPTDIR}/mr_add.sh"
 set -e
 
 if [ "$#" -ne "4" ]; then
-  echo "$0: <MAP> <NAME> <RAIDDEV> [FILE|LOOP]"
+  echo "$0: <MAP> <NAME> <RAIDDEV> <FILE|LOOP>"
   exit 1
 fi
 
