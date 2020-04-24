@@ -15,7 +15,7 @@ cat mnt_locations.map
 ```
 
 ## Choosing a Size
-When creating a microraid, you will select the size by specifying the number of 4k blocks per image. \
+When creating a microraid, you will select the size by specifying the number of 4k blocks per disk image. \
 The formula will look like this: `SIZE in GB = (4096*BLOCKCOUNT)/(1e9)` \
 See the table below for help with selecting a block count.
 
