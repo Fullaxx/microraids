@@ -3,12 +3,12 @@ First we need to make sure we have all the appropriate tools. \
 Please consult this chart for help with installing the required packages. \
 If your OS is not listed, please help us fill out the table, or submit a request via github.
 
-| Operating System   | Commands (as root)                                                               |
-| ------------------ | -------------------------------------------------------------------------------- |
-| CentOS             | `yum install -y epel-release; yum install -y calc gdisk hdparm mdadm`            |
-| Debian             | `apt update; apt install --no-install-recommends -y apcalc gdisk hdparm mdadm`   |
-| Fedora             | `yum install -y calc gdisk hdparm mdadm`                                         |
-| Ubuntu             | `apt update; apt install apcalc btrfs-progs gdisk hdparm mdadm`                  |
+| Operating System   | Commands (as root)                                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------ |
+| CentOS             | `yum install -y epel-release; yum install -y calc gdisk hdparm mdadm`                      |
+| Debian             | `apt update; apt install --no-install-recommends -y apcalc btrfs-progs gdisk hdparm mdadm` |
+| Fedora             | `yum install -y calc gdisk hdparm mdadm`                                                   |
+| Ubuntu             | `apt update; apt install apcalc btrfs-progs gdisk hdparm mdadm`                            |
 
 ## Disk Partitioning
 In this example we will start with 8 blank disks. \
