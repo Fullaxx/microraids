@@ -1,6 +1,7 @@
 #!/bin/bash
 
 SCRIPTDIR=`dirname $0`
+INFOSCRIPT="${SCRIPTDIR}/mr_info.sh"
 REMOVESCRIPT="${SCRIPTDIR}/mr_remove.sh"
 ADDSCRIPT="${SCRIPTDIR}/mr_add.sh"
 set -e
@@ -66,7 +67,6 @@ else
   echo "I dont know what to do with $4"
   exit 9
 fi
-
 if [ ! -b "${LOOP}" ]; then
   echo "${LOOP} is not a block device!"
   exit 10
@@ -75,6 +75,12 @@ fi
 if [ ! -r "${FDIMG}" ]; then
   echo "${FDIMG} is not readable!"
   exit 11
+fi
+
+# Validate that ${FDIMG} belongs to ${NAME}
+if ! ${INFOSCRIPT} ${MAP} ${NAME} | grep -qw ${FDIMG}; then
+  echo "${FDIMG} does not belong to ${NAME}!"
+  exit 12
 fi
 
 echo "Replacing Faulty Disk Image: ${FDIMG} (${LOOP}) ..."
