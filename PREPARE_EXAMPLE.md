@@ -7,7 +7,7 @@ If your OS is not listed, please help us fill out the table, or submit a request
 | ------------------ | ------------------------------------------------------------------------------------------ |
 | CentOS             | `yum install -y epel-release; yum install -y calc gdisk hdparm mdadm`                      |
 | Debian             | `apt update; apt install --no-install-recommends -y apcalc btrfs-progs gdisk hdparm mdadm` |
-| Fedora             | `yum install -y calc gdisk hdparm mdadm`                                                   |
+| Fedora             | `yum install -y btrfs-progs calc gdisk hdparm mdadm`                                       |
 | Ubuntu             | `apt update; apt install apcalc btrfs-progs gdisk hdparm mdadm`                            |
 
 ## Disk Partitioning
