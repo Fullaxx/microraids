@@ -41,13 +41,19 @@ if [ "$?" != "0" ]; then
   exit 6
 fi
 
+CALCBIN=`which calc`
+if [ "$?" != "0" ]; then
+  echo "calc not found!"
+  exit 7
+fi
+
 RTYPE=`${MDBIN} --detail ${RAIDDEV} | grep 'Raid Level : ' | awk '{print $4}'`
 case "${RTYPE}" in
   raid1) echo "${RAIDDEV} is ${RTYPE}";;
   raid4) echo "${RAIDDEV} is ${RTYPE}";;
   raid5) echo "${RAIDDEV} is ${RTYPE}";;
   raid6) echo "${RAIDDEV} is ${RTYPE}";;
-      *) echo "${RTYPE} not supported!"; exit 7;;
+      *) echo "${RTYPE} not supported!"; exit 8;;
 esac
 
 if [ -b "$4" ]; then
@@ -58,17 +64,17 @@ elif [ -f "$4" ]; then
   LOOP=`${LOBIN} -a | grep -w ${FDIMG} | cut -d: -f1`
 else
   echo "I dont know what to do with $4"
-  exit 8
+  exit 9
 fi
 
 if [ ! -b "${LOOP}" ]; then
   echo "${LOOP} is not a block device!"
-  exit 9
+  exit 10
 fi
 
 if [ ! -r "${FDIMG}" ]; then
   echo "${FDIMG} is not readable!"
-  exit 10
+  exit 11
 fi
 
 echo "Replacing Faulty Disk Image: ${FDIMG} (${LOOP}) ..."
@@ -85,12 +91,12 @@ fi
 ${REMOVESCRIPT} ${MAP} ${NAME} ${RAIDDEV} ${LOOP}
 
 echo
+BS="4096"
 BYTES=`ls -l ${FDIMG} | awk '{print $5}' | sort -u | head -n1`
+BLOCKS=`${CALCBIN} "${BYTES}/${BS}" | awk '{print $1}'`
 mv ${FDIMG} ${FDIMG}.bad
-#dd if=/dev/zero of=${FDLOC}/${FDIMG} bs=4096 count=0 seek=1024
-#dd if=/dev/zero of=${FDLOC}/${FDIMG} bs=1 count=0 seek=4194304
 echo "Creating new disk image: ${FDIMG}"
-dd if=/dev/zero of=${FDIMG} bs=1 count=${BYTES}
+dd if=/dev/zero of=${FDIMG} bs=${BS} count=${BLOCKS}
 echo
 
 ${ADDSCRIPT} ${MAP} ${NAME} ${RAIDDEV} ${FDIMG}
