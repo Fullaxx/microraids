@@ -45,7 +45,7 @@ NEWRAID=`grep -w ${FIRSTDEV} /proc/mdstat | awk '{print $1}'`
 
 if [ -z "${NEWRAID}" ]; then
   echo "${FIRSTDEV} does not appear to be attached to a raid device!"
-  exit 9
+  exit 4
 fi
 
 if ${MDBIN} --detail /dev/${NEWRAID} | grep 'State :' | cut -d: -f2- | grep -qw inactive; then
@@ -53,7 +53,7 @@ if ${MDBIN} --detail /dev/${NEWRAID} | grep 'State :' | cut -d: -f2- | grep -qw 
   echo "You will have to run manually and troubleshoot:"
   echo "mdadm -R /dev/${NEWRAID}"
   echo "mdadm --detail /dev/${NEWRAID}"
-  exit 10
+  exit 5
 fi
 
 #RAIDCOUNT=`ls -1 /dev/md/ 2>/dev/null | wc -l`
@@ -79,4 +79,4 @@ done
 
 # We couldn't find the named raid device?
 echo "raid device not found under /dev/md/"
-exit 11
+exit 6
