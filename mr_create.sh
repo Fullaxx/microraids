@@ -63,19 +63,19 @@ fi
 
 CALCBIN=`which calc`
 if [ "$?" != "0" ]; then
-  echo "Couldnt find calc!"
+  echo "calc not found!"
   exit 6
 fi
 
 LOBIN=`PATH="/sbin:/usr/sbin:$PATH" which losetup`
 if [ "$?" != "0" ]; then
-  echo "Couldnt find losetup!"
+  echo "losetup not found!"
   exit 7
 fi
 
 MDBIN=`PATH="/sbin:/usr/sbin:$PATH" which mdadm`
 if [ "$?" != "0" ]; then
-  echo "Couldnt find mdadm!"
+  echo "mdadm not found!"
   exit 8
 fi
 

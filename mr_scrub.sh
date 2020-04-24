@@ -27,7 +27,7 @@ fi
 
 BTFSBIN=`PATH="/sbin:/usr/sbin:$PATH" which btrfs`
 if [ "$?" != "0" ]; then
-  echo "Couldnt find btrfs!"
+  echo "btrfs not found!"
   exit 3
 fi
 
