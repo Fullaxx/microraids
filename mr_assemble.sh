@@ -37,21 +37,46 @@ echo
 # Wait for the kernel to autodetect the raid on the loops
 echo "Sleeping 2 seconds for kernel auto-detect ..."
 sleep 2
+echo
 
 # Look for new raid device under /dev/md/
 FIRSTDEV=`basename ${loop_array[0]}`
 NEWRAID=`grep -w ${FIRSTDEV} /proc/mdstat | awk '{print $1}'`
-if [ -n "${NEWRAID}" ]; then
-  for DEV in /dev/md/*; do
-    RP=`realpath ${DEV}`
-    if [ "${RP}" == "/dev/${NEWRAID}" ]; then
-      grep ${NEWRAID} /proc/mdstat
-      echo "${DEV} is ready!"
-      exit 0
-    fi
-  done
+
+if [ -z "${NEWRAID}" ]; then
+  echo "${FIRSTDEV} does not appear to be attached to a raid device!"
+  exit 9
 fi
 
-# NO NEW DEVICES FOUND
-echo "No new raid devices found under /dev/md/"
-exit 9
+if ${MDBIN} --detail /dev/${NEWRAID} | grep 'State :' | cut -d: -f2- | grep -qw inactive; then
+  echo "/dev/${NEWRAID} has been partially assembled, but did not run (state: inactive)"
+  echo "You will have to run manually and troubleshoot:"
+  echo "mdadm -R /dev/${NEWRAID}"
+  echo "mdadm --detail /dev/${NEWRAID}"
+  exit 10
+fi
+
+#RAIDCOUNT=`ls -1 /dev/md/ 2>/dev/null | wc -l`
+#if [ "${RAIDCOUNT}" == "0" ]; then
+#  echo "No raid devices found under /dev/md/"
+#  echo "${NEWRAID} did not assemble correctly!"
+#  echo "If your array is degraded, you might have to run manually:"
+#  echo "mdadm -R /dev/${NEWRAID} ${loop_array[@]}"
+#  echo "mdadm --detail /dev/${NEWRAID}"
+#  exit 10
+#fi
+
+for DEV in /dev/md/*; do
+  RP=`realpath ${DEV}`
+  if [ "${RP}" == "/dev/${NEWRAID}" ]; then
+    grep ${NEWRAID} /proc/mdstat
+    echo "${DEV} is ready!"
+    echo -n "State:"
+    ${MDBIN} --detail /dev/${NEWRAID} | grep 'State :' | cut -d: -f2-
+    exit 0
+  fi
+done
+
+# We couldn't find the named raid device?
+echo "raid device not found under /dev/md/"
+exit 11
