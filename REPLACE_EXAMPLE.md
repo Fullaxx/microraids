@@ -1,8 +1,8 @@
 ## Fix Your Microraid
 If you find that one of your disk images has bad blocks or is corrupt in some way, \
 You can recreate your disk image using the mr_replace.sh script. \
-*NOTE* RAID-0 had no parity, you cannot recover/recreate any disk images in a RAID-0 array. \
-This script takes 4 argument, the map, the name, the raid device and either the bad file or loop. \
+*NOTE* RAID-0 has no parity, you cannot recover/recreate any disk images in a RAID-0 array. \
+This script takes 4 arguments: the map, the name, the raid device and either the bad file or loop. \
 In the first example we will give it the corrupt file.
 ```bash
 ./mr_replace.sh: <MAP> <NAME> <RAIDDEV> <FILE|LOOP>
