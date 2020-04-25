@@ -19,15 +19,16 @@ During creation, the size will be determined by specifying the number of 4k bloc
 The formula will look like this: `SIZE in GB = (4096*BLOCKCOUNT)/(1e9)` \
 You can use any value for BLOCKCOUNT. See the table below for some examples.
 
-| Block Count | Formula                 | Image Size |
-| ----------- | ----------------------- | ---------- |
-| 1000000     | =(4096*1000000)/(1e9)   | 4.096 GB   |
-| 2000000     | =(4096*2000000)/(1e9)   | 8.192 GB   |
-| 5000000     | =(4096*5000000)/(1e9)   | 20.48 GB   |
-| 10000000    | =(4096*10000000)/(1e9)  | 40.96 GB   |
-| 20000000    | =(4096*20000000)/(1e9)  | 81.92 GB   |
-| 50000000    | =(4096*50000000)/(1e9)  | 204.8 GB   |
-| 100000000   | =(4096*100000000)/(1e9) | 409.6 GB   |
+| Block Count | Image Size | Formula                 |
+| ----------- | ---------- | ----------------------- |
+| 1000000     | 4.096 GB   | =(4096*1000000)/(1e9)   |
+| 2000000     | 8.192 GB   | =(4096*2000000)/(1e9)   |
+| 5000000     | 20.48 GB   | =(4096*5000000)/(1e9)   |
+| 10000000    | 40.96 GB   | =(4096*10000000)/(1e9)  |
+| 20000000    | 81.92 GB   | =(4096*20000000)/(1e9)  |
+| 50000000    | 204.8 GB   | =(4096*50000000)/(1e9)  |
+| 100000000   | 409.6 GB   | =(4096*100000000)/(1e9) |
+| 200000000   | 819.2 GB   | =(4096*200000000)/(1e9) |
 
 ## Create
 Next, use the map to create a raid6 with 256k chunk size spanning 8 disk images. \
