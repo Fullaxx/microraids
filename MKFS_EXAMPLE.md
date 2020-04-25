@@ -28,15 +28,15 @@ mkfs.ext4 -vv -b4096 -m0 -O metadata_csum,64bit -T largefile  -L ${LABEL} ${RAID
 mkfs.ext4 -vv -b4096 -m0 -O metadata_csum,64bit -T largefile4 -L ${LABEL} ${RAIDDEV}
 ```
 
-## Tuning EXT4
-Ext4 has 3 types of journal modes: Journal, Ordered, and Writeback. \
+Ext4 has 3 types of journal opting: Journal, Ordered, and Writeback. \
 Adjust your ext4 filesystem using one of the following commands. \
 Only run tune2fs while the filesystem is unmounted.
 ```
-Set Journal Mode: tune2fs -O has_journal -o journal_data ${RAIDDEV}
-Set Ordered Mode: tune2fs -O has_journal -o journal_data_ordered ${RAIDDEV}
-Set Writeback Mode: tune2fs -O has_journal -o journal_data_writeback ${RAIDDEV}
+tune2fs -O has_journal -o journal_data ${RAIDDEV}
+tune2fs -O has_journal -o journal_data_ordered ${RAIDDEV}
+tune2fs -O has_journal -o journal_data_writeback ${RAIDDEV}
 ```
+
 Enable directory indexing with the following command. \
 Only run tune2fs/e2fsck while the filesystem is unmounted.
 ```
