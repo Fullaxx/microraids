@@ -102,6 +102,8 @@ mr_info()
   else
     echo "${NAME} appears to be assembled into ${RAIDDEV}"
   fi
+  echo -n "${raid_array[0]} :"
+  ${MDBIN} --detail ${RAIDDEV} | grep 'State :' | cut -d: -f2-
   grep -A1 -w "${raid_array[0]}" /proc/mdstat
 }
 
@@ -132,6 +134,12 @@ LOBIN=`PATH="/sbin:/usr/sbin:$PATH" which losetup`
 if [ "$?" != "0" ]; then
   echo "losetup not found!"
   exit 4
+fi
+
+MDBIN=`PATH="/sbin:/usr/sbin:$PATH" which mdadm`
+if [ "$?" != "0" ]; then
+  echo "mdadm not found!"
+  exit 5
 fi
 
 if [ "$#" == "1" ]; then
