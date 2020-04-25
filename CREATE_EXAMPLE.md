@@ -43,7 +43,7 @@ Creating Images: 8 * 49.152G each = 393.216G
 Creating raid6 /dev/md/mynewraid: 294.912G
 ```
 
-`cat /proc/mdstat` will show you the current resync status if you chose raid5 or raid6. \
+`cat /proc/mdstat` will show you the current resync status. \
 `mdadm --detail /dev/md/mynewraid` will show you more detailed information about the raid device.
 ```bash
 cat /proc/mdstat
@@ -52,7 +52,35 @@ md125 : active raid6 loop35[7] loop34[6] loop33[5] loop32[4] loop31[3] loop30[2]
       [=======>.............]  resync = 36.4% (17480284/47966208) finish=6.2min speed=81540K/sec
 ```
 
-These are the disk images that make up your raid6 array
+## Log File
+After creattion there will be a log file for your microraid: ${NAME}.log `cat mynewraid.log`
+```bash
+cat mynewraid.log
+./mr_create.sh mnt_locations.map mynewraid 6 8 256 12000000
+
+dd if=/dev/zero of=/mnt/VAJ7LEPL/mynewraid/mynewraid.1.rimg bs=4096 count=0 seek=12000000
+dd if=/dev/zero of=/mnt/VAJDDMHL/mynewraid/mynewraid.2.rimg bs=4096 count=0 seek=12000000
+dd if=/dev/zero of=/mnt/VAJBPNDL/mynewraid/mynewraid.3.rimg bs=4096 count=0 seek=12000000
+dd if=/dev/zero of=/mnt/VDG04BHK/mynewraid/mynewraid.4.rimg bs=4096 count=0 seek=12000000
+dd if=/dev/zero of=/mnt/VAHJW81L/mynewraid/mynewraid.5.rimg bs=4096 count=0 seek=12000000
+dd if=/dev/zero of=/mnt/VAJ0V17L/mynewraid/mynewraid.6.rimg bs=4096 count=0 seek=12000000
+dd if=/dev/zero of=/mnt/VAHKY2ML/mynewraid/mynewraid.7.rimg bs=4096 count=0 seek=12000000
+dd if=/dev/zero of=/mnt/VAHX5NWL/mynewraid/mynewraid.8.rimg bs=4096 count=0 seek=12000000
+
+mdadm -C /dev/md/mynewraid -l 6 -n 8 -c 256 /dev/loop20 /dev/loop21 /dev/loop22 /dev/loop23 /dev/loop24 /dev/loop25 /dev/loop26 /dev/loop27
+
+mynewraid.1.rimg: /dev/loop20
+mynewraid.2.rimg: /dev/loop21
+mynewraid.3.rimg: /dev/loop22
+mynewraid.4.rimg: /dev/loop23
+mynewraid.5.rimg: /dev/loop24
+mynewraid.6.rimg: /dev/loop25
+mynewraid.7.rimg: /dev/loop26
+mynewraid.8.rimg: /dev/loop27
+```
+
+## Disk Images
+These are the disk images that make up your new raid6 array.
 ```bash
 ls -lh /mnt/*/mynewraid/*.rimg
 -rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VAHJW81L/mynewraid/mynewraid.5.rimg
