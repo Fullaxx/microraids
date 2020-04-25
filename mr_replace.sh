@@ -95,14 +95,24 @@ if [ "${ANS}" != "y" ] && [ "${ANS}" != "Y" ]; then
 fi
 
 ${REMOVESCRIPT} ${MAP} ${NAME} ${RAIDDEV} ${LOOP}
-
 echo
+
 BS="4096"
 BYTES=`ls -l ${FDIMG} | awk '{print $5}' | sort -u | head -n1`
 BLOCKS=`${CALCBIN} "${BYTES}/${BS}" | awk '{print $1}'`
 mv ${FDIMG} ${FDIMG}.bad
-echo "Creating new disk image: ${FDIMG}"
-dd if=/dev/zero of=${FDIMG} bs=${BS} count=${BLOCKS}
-echo
 
+# When creating a replacement image on the same disk as a faulty image
+# We will default to writing zeros to our new file to validate sectors
+# If you trust the new sectors and are ok with doing validation during recovery
+# You can adjust the default behavior with the env variable MR_REPLACE_VALIDATION="quick"
+if [ "${MR_REPLACE_VALIDATION}" == "quick" ]; then
+  echo "Creating new disk image: ${FDIMG} (Sector Validation DISABLED) ..."
+  dd if=/dev/zero of=${FDIMG} bs=${BS} count=0 seek=${BLOCKS}
+else
+  echo "Creating new disk image: ${FDIMG} (Sector Validation Enabled) ..."
+  dd if=/dev/zero of=${FDIMG} bs=${BS} count=${BLOCKS}
+fi
+
+echo
 ${ADDSCRIPT} ${MAP} ${NAME} ${RAIDDEV} ${FDIMG}
