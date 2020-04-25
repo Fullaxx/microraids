@@ -10,8 +10,10 @@ btrfs scrub status /mnt/VAHAW81L
 
 If you have a microraids map file, you can use the provided scrub script to check all your filesystems.
 ```bash
-./mr_scrub.sh start mnt_locations.map
-./mr_scrub.sh status mnt_locations.map
+./mr_scrub.sh <MAP> <start|status>
+
+./mr_scrub.sh mnt_locations.map start
+./mr_scrub.sh mnt_locations.map status
 ```
 
 For each filesystem, it will give you relevant status.
