@@ -149,3 +149,39 @@ while [ ${INDEX} -ne ${NUMDEV} ]; do
   echo "${file_array[${INDEX}]}: ${loop_array[${INDEX}]}" >> ${LOG}
   INDEX=$(( INDEX+1 ))
 done
+
+# If raid1, FS hints would be irrelevant
+if [ "${RL}" == "1" ]; then
+  exit 0
+fi
+
+# https://gryzli.info/2015/02/26/calculating-filesystem-stride_size-and-stripe_width-for-best-performance-under-raid/
+# Stride size = [RAID chunk size] / [Filesystem block size]
+# Stripe width = [Stride size] * [Number of data-bearing disks]
+echo >> ${LOG}
+echo "EXT4 Hints:" >> ${LOG}
+
+STRIDE=`${CALCBIN} "${CHUNK}/1" | awk '{print $1}'`
+SWIDTH=`${CALCBIN} "${STRIDE}*(${NUMDEV}-${MD})" | awk '{print $1}'`
+echo "mkfs.ext4 -b 1024 -E stride=${STRIDE},stripe_width=${SWIDTH} /dev/md/${RAIDNAME}" >> ${LOG}
+
+STRIDE=`${CALCBIN} "${CHUNK}/4" | awk '{print $1}'`
+SWIDTH=`${CALCBIN} "${STRIDE}*(${NUMDEV}-${MD})" | awk '{print $1}'`
+echo "mkfs.ext4 -b 4096 -E stride=${STRIDE},stripe_width=${SWIDTH} /dev/md/${RAIDNAME}" >> ${LOG}
+
+# https://erikugel.wordpress.com/tag/btrfs/
+# https://www.mythtv.org/wiki/Optimizing_Performance#Optimizing_XFS_on_RAID_Arrays
+echo >> ${LOG}
+echo "XFS Hints:" >> ${LOG}
+SUNIT=`${CALCBIN} "(${CHUNK}*1024)/512" | awk '{print $1}'`
+SWIDTH=`${CALCBIN} "${SUNIT}*(${NUMDEV}-${MD})" | awk '{print $1}'`
+echo "mkfs.xfs -b size=1024  -d sunit=${SUNIT},swidth=${SWIDTH} /dev/md/${RAIDNAME}" >> ${LOG}
+echo "mkfs.xfs -b size=2048  -d sunit=${SUNIT},swidth=${SWIDTH} /dev/md/${RAIDNAME}" >> ${LOG}
+echo "mkfs.xfs -b size=4096  -d sunit=${SUNIT},swidth=${SWIDTH} /dev/md/${RAIDNAME}" >> ${LOG}
+echo "mkfs.xfs -b size=8192  -d sunit=${SUNIT},swidth=${SWIDTH} /dev/md/${RAIDNAME}" >> ${LOG}
+echo "mkfs.xfs -b size=16384 -d sunit=${SUNIT},swidth=${SWIDTH} /dev/md/${RAIDNAME}" >> ${LOG}
+
+# Does btrfs read this automatically?
+echo >> ${LOG}
+echo "BTRFS Hints:" >> ${LOG}
+echo "mkfs.btrfs /dev/md/${RAIDNAME}" >> ${LOG}

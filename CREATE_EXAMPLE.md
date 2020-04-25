@@ -53,7 +53,10 @@ md125 : active raid6 loop35[7] loop34[6] loop33[5] loop32[4] loop31[3] loop30[2]
 ```
 
 ## Log File
-After creattion there will be a log file for your microraid: ${NAME}.log `cat mynewraid.log`
+After creation there will be a log file for your microraid: ${NAME}.log `cat mynewraid.log` \
+At the end of the log you will find hints to help optimize your filesystem. \
+Stride and stripe width are calculated based on raid chunk size and number of data-bearing images. \
+If you chose raid1, you will not find hints. Strides and stripe widths are irrelevant on raid1.
 ```bash
 cat mynewraid.log
 ./mr_create.sh mnt_locations.map mynewraid 6 8 256 12000000
@@ -77,6 +80,20 @@ mynewraid.5.rimg: /dev/loop24
 mynewraid.6.rimg: /dev/loop25
 mynewraid.7.rimg: /dev/loop26
 mynewraid.8.rimg: /dev/loop27
+
+EXT4 Hints:
+mkfs.ext4 -b 1024 -E stride=256,stripe_width=1536 /dev/md/mynewraid
+mkfs.ext4 -b 4096 -E stride=64,stripe_width=384 /dev/md/mynewraid
+
+XFS Hints:
+mkfs.xfs -b size=1024  -d sunit=512,swidth=3072 /dev/md/mynewraid
+mkfs.xfs -b size=2048  -d sunit=512,swidth=3072 /dev/md/mynewraid
+mkfs.xfs -b size=4096  -d sunit=512,swidth=3072 /dev/md/mynewraid
+mkfs.xfs -b size=8192  -d sunit=512,swidth=3072 /dev/md/mynewraid
+mkfs.xfs -b size=16384 -d sunit=512,swidth=3072 /dev/md/mynewraid
+
+BTRFS Hints:
+mkfs.btrfs /dev/md/mynewraid
 ```
 
 ## Disk Images
