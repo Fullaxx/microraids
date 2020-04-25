@@ -35,6 +35,7 @@ echo
 # echo "Loop Devices: ${loop_array[@]}"
 
 # Wait for the kernel to autodetect the raid on the loops
+${MDBIN} --auto-detect
 echo "Sleeping 2 seconds for kernel auto-detect ..."
 sleep 2
 echo
