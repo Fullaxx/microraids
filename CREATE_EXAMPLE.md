@@ -14,7 +14,23 @@ cat mnt_locations.map
 /mnt/VAHX5NWL
 ```
 
-## Choosing a Size
+## Choose a Raid Level
+This table is a brief overview of the supported raid levels. \
+Column 2 shows you the minimum number of images required to start the microraid. \
+Column 3 shows the fault tolerance of each raid level. \
+Raid-0 has no redundancy, therefore if you lose any image, you will lose data. \
+Raid-1 has N copies of data, so you can lose all but 1 copy of the image, and still recover all data. \
+A detailed explantion of raid levels, advantages, and disadvantages can be found
+[here](https://www.booleanworld.com/raid-levels-explained/) and [here](https://linuxacademy.com/blog/linux/raid-explained/)
+| Raid Level      | Min | FT  |
+| --------------- | --- | --- |
+| Raid-0 (Stripe) | 1   | 0   |
+| Raid-1 (Mirror) | 2   | N-1 |
+| Raid-4          | 3   | 1   |
+| Raid-5          | 3   | 1   |
+| Raid-6          | 4   | 2   |
+
+## Choose a Size
 During creation, the size will be determined by specifying the number of 4k blocks per disk image. \
 The formula will look like this: `SIZE in GB = (4096*BLOCKCOUNT)/(1e9)` \
 You can use any value for BLOCKCOUNT. See the table below for some examples.
@@ -31,7 +47,7 @@ You can use any value for BLOCKCOUNT. See the table below for some examples.
 | 200000000   | 819.2 GB   | =(4096*200000000)/(1e9) |
 
 ## Create
-Next, use the map to create a raid6 with 256k chunk size spanning 8 disk images. \
+Next, choose a name and use the map to create a raid6 with 256k chunk size spanning 8 disk images. \
 With a block count of 12000000, each image will be 49.152G (4k*12000000) of physical disk space. \
 Total space taken up on disk 393.216G (parity + data) \
 Total usable filesystem space 294.912G (available for data)
@@ -56,7 +72,7 @@ md125 : active raid6 loop35[7] loop34[6] loop33[5] loop32[4] loop31[3] loop30[2]
 After creation there will be a log file for your microraid: ${NAME}.log `cat mynewraid.log` \
 At the end of the log you will find hints to help optimize your filesystem. \
 Stride and stripe width are calculated based on raid chunk size and number of data-bearing images. \
-If you chose raid1, you will not find hints. Strides and stripe widths are irrelevant on raid1.
+If you choose raid1, you will not find hints. Strides and stripe widths are irrelevant on raid1.
 ```bash
 cat mynewraid.log
 ./mr_create.sh mnt_locations.map mynewraid 6 8 256 12000000
