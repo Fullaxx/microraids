@@ -18,8 +18,11 @@ cat mnt_locations.map
 This table is a brief overview of the supported raid levels. \
 Column 2 shows you the minimum number of images required to start the microraid. \
 Column 3 shows the fault tolerance of each raid level. \
-Raid-0 has no redundancy, therefore if you lose any image, you will lose data. \
-Raid-1 has N copies of data, so you can lose all but 1 copy of the image, and still recover all data. \
+Raid-0 has no redundancy. If you lose any image, you will lose data. (FT: 0)\
+Raid-1 will mirror all data to each image, making N copies. (FT: all disks but 1) \
+Raid-4 will take one of your images and write all parity information to that image. (FT: 1 disk) \
+Raid-5 will insert parity blocks into your data stripe on different disks based on the algorithm selected. (FT: 1 disk) \
+Raid-6 will insert 2 parity blocks into your data stripe on different disks based on the algorithm selected. (FT: 2 disks) \
 A detailed explantion of raid levels, advantages, and disadvantages can be found
 [here](https://www.booleanworld.com/raid-levels-explained/) and [here](https://linuxacademy.com/blog/linux/raid-explained/)
 | Raid Level      | Min | FT  |
