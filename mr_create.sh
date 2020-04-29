@@ -126,8 +126,13 @@ while [ ${INDEX} -ne ${NUMDEV} ]; do
   mkdir "${NEXTDIR}"
   if [ -e ${NEXTDIR}/${OUTF} ]; then echo "${NEXTDIR}/${OUTF} exists!"; exit 1; fi
   file_array[${INDEX}]="${OUTF}"
-  dd ${SRC} of=${NEXTDIR}/${OUTF} bs=${BS} count=0 seek=${CNT} 2>/dev/null
-  echo "dd ${SRC} of=${NEXTDIR}/${OUTF} bs=${BS} count=0 seek=${CNT}" >> ${LOG}
+  if [ "${MR_CREATE_SPARSE}" == "no" ]; then
+    dd ${SRC} of=${NEXTDIR}/${OUTF} bs=${BS} count=${CNT} 2>/dev/null
+    echo "dd ${SRC} of=${NEXTDIR}/${OUTF} bs=${BS} count=${CNT}" >> ${LOG}
+  else
+    dd ${SRC} of=${NEXTDIR}/${OUTF} bs=${BS} count=0 seek=${CNT} 2>/dev/null
+    echo "dd ${SRC} of=${NEXTDIR}/${OUTF} bs=${BS} count=0 seek=${CNT}" >> ${LOG}
+  fi
   LOOPDEV=`${LOBIN} --find --show ${NEXTDIR}/${OUTF}`
   loop_array[${INDEX}]="${LOOPDEV}"
   INDEX=$(( INDEX+1 ))

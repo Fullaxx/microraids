@@ -116,7 +116,14 @@ mkfs.btrfs /dev/md/mynewraid
 ```
 
 ## Disk Images
-These are the disk images that make up your new raid6 array.
+These are the disk images that make up your new raid6 array. \
+By default, these disk images are sparse files. They have not been completely allocated on disk. \
+As you add data to your microraid, the physical disk usage will grow. \
+This is why the output of ls and df can differ. \
+ls will show you the size of your sparse file, and df will show you the amount of data allocated on disk. \
+Using this feature you can over-provision your physical disks. \
+If you want to turn this off, set MR_CREATE_SPARSE="no" in the environment to fully allocate disk images during creation. \
+More information about sparse files can be found [here](https://unix.stackexchange.com/questions/108858/seek-argument-in-command-dd)
 ```bash
 ls -lh /mnt/*/mynewraid/*.rimg
 -rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VAHJW81L/mynewraid/mynewraid.5.rimg
@@ -127,6 +134,17 @@ ls -lh /mnt/*/mynewraid/*.rimg
 -rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VAJBPNDL/mynewraid/mynewraid.3.rimg
 -rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VAJDDMHL/mynewraid/mynewraid.2.rimg
 -rw-r--r-- 1 root root 46G Apr 19 14:00 /mnt/VDG04BHK/mynewraid/mynewraid.4.rimg
+
+df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdc1       7.3T   17M  7.3T   1% /mnt/VAHJW81L
+/dev/sdf1       7.3T   17M  7.3T   1% /mnt/VAHKY2ML
+/dev/sdh1       7.3T   17M  7.3T   1% /mnt/VAHX5NWL
+/dev/sde1       7.3T   17M  7.3T   1% /mnt/VAJ0V17L
+/dev/sdd1       7.3T   17M  7.3T   1% /mnt/VAJ7LEPL
+/dev/sdj1       7.3T   17M  7.3T   1% /mnt/VAJBPNDL
+/dev/sdi1       7.3T   17M  7.3T   1% /mnt/VAJDDMHL
+/dev/sdk1       7.3T   17M  7.3T   1% /mnt/VDG04BHK
 ```
 
 ## Filesystem and Mounting
