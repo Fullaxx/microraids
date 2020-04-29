@@ -122,7 +122,7 @@ As you add data to your microraid, the physical disk usage will grow. \
 This is why the output of ls and df can differ. \
 ls will show you the size of your sparse file, and df will show you the amount of data allocated on disk. \
 Using this feature you can over-provision your physical disks. \
-If you want to turn this off, set MR_CREATE_SPARSE="no" in the environment to fully allocate disk images during creation. \
+If you want to turn this off, set `MR_CREATE_SPARSE="no"` in the environment to fully allocate disk images during creation. \
 More information about sparse files can be found [here](https://unix.stackexchange.com/questions/108858/seek-argument-in-command-dd)
 ```bash
 ls -lh /mnt/*/mynewraid/*.rimg
