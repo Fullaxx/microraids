@@ -104,8 +104,9 @@ if [ ! -b ${RAIDDEV} ]; then
 fi
 
 # if our raid device is mounted, DO NOT try and stop the raid
-if mount | grep -q ${RAIDDEV}; then
+if mount | grep -qw ${RAIDDEV}; then
   echo "${RAIDDEV} appears to be mounted!"
+  mount | grep -w ${RAIDDEV}
   exit 11
 fi
 
