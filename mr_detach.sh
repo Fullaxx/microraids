@@ -4,7 +4,7 @@ set -e
 
 if [ "$#" -ne "2" ]; then
   echo "$0: <MAP> <NAME>"
-  exit 1
+  exit 21
 fi
 
 MAP="$1"
@@ -12,18 +12,18 @@ NAME="$2"
 
 if [ `id -u` -ne "0" ]; then
   echo "Got Root?"
-  exit 2
+  exit 22
 fi
 
 if [ ! -r ${MAP} ]; then
   echo "${MAP} is not readable!"
-  exit 3
+  exit 23
 fi
 
 LOBIN=`PATH="/sbin:/usr/sbin:$PATH" which losetup`
 if [ "$?" != "0" ]; then
   echo "losetup not found!"
-  exit 4
+  exit 24
 fi
 
 echo "Searching for ${NAME} ..."
@@ -35,7 +35,7 @@ RAIDCOUNT="0"
 declare -a loop_array
 while read -r LINE; do
   if [ ! -d ${LINE}/${NAME} ]; then
-    echo "${LINE}/${NAME} is not a directory!"; exit 5
+    echo "${LINE}/${NAME} is not a directory!"; exit 25
   fi
   DIMG=`ls -1 ${LINE}/${NAME}/${NAME}.?.rimg`
 
@@ -64,13 +64,13 @@ echo
 # If ${NAME} is not active, we could exit 0 here?
 if [ "${INDEX}" == "0" ]; then
   echo "${NAME} does not appear to be active"
-  exit 6
+  exit 26
 fi
 
 # RAIDCOUNT should equal zero b/c the raid should have been dismantled by now
 if [ "${RAIDCOUNT}" != "0" ]; then
   echo "RAID appears to be active, Cowardly refusing to continue!"
-  exit 7
+  exit 27
 fi
 
 # echo "${loop_array[@]}"

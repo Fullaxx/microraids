@@ -65,9 +65,4 @@ done < ${MAP}
 
 # Assemble all these images into a RAID device
 ${ASSEMBLESCRIPT} ${dimg_array[@]}
-
-# IS THIS UNNECESSARY ??
-#if [ ! -b /dev/md/*${NAME} ]; then
-#  echo "Could not find block device for ${NAME}"
-#  exit 6
-#fi
+exit $?

@@ -4,19 +4,19 @@ set -e
 
 if [ `id -u` -ne "0" ]; then
   echo "Got Root?"
-  exit 1
+  exit 21
 fi
 
 LOBIN=`PATH="/sbin:/usr/sbin:$PATH" which losetup`
 if [ "$?" != "0" ]; then
   echo "losetup not found!"
-  exit 2
+  exit 22
 fi
 
 MDBIN=`PATH="/sbin:/usr/sbin:$PATH" which mdadm`
 if [ "$?" != "0" ]; then
   echo "mdadm not found!"
-  exit 3
+  exit 23
 fi
 
 # Loop all our images and create an array upon success
@@ -46,7 +46,7 @@ NEWRAID=`grep -w ${FIRSTDEV} /proc/mdstat | awk '{print $1}'`
 
 if [ -z "${NEWRAID}" ]; then
   echo "${FIRSTDEV} does not appear to be attached to a raid device!"
-  exit 4
+  exit 24
 fi
 
 if ${MDBIN} --detail /dev/${NEWRAID} | grep 'State :' | cut -d: -f2- | grep -qw inactive; then
@@ -54,7 +54,7 @@ if ${MDBIN} --detail /dev/${NEWRAID} | grep 'State :' | cut -d: -f2- | grep -qw 
   echo "You will have to run manually and troubleshoot:"
   echo "mdadm -R /dev/${NEWRAID}"
   echo "mdadm --detail /dev/${NEWRAID}"
-  exit 5
+  exit 25
 fi
 
 #RAIDCOUNT=`ls -1 /dev/md/ 2>/dev/null | wc -l`
@@ -80,4 +80,4 @@ done
 
 # We couldn't find the named raid device?
 echo "raid device not found under /dev/md/"
-exit 6
+exit 26
