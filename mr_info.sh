@@ -105,6 +105,12 @@ mr_info()
   echo -n "${raid_array[0]} :"
   ${MDBIN} --detail ${RAIDDEV} | grep 'State :' | cut -d: -f2-
   grep -A1 -w "${raid_array[0]}" /proc/mdstat
+
+  if mount | grep -qw ${raid_array[0]}; then
+    echo
+    echo "${NAME} appears to be mounted: "
+    mount | grep ${raid_array[0]}
+  fi
 }
 
 set -e
