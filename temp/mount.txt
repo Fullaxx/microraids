@@ -15,14 +15,3 @@ G:\ on /mnt/g type drvfs (rw,noatime,uid=1000,gid=1000,case=off)
 /dev/sda1 on whatever
 /dev/sdj1 on whatever
 /dev/sdj2 on whatever
-
-/dev/sda
-/dev/sdb
-/dev/sdc
-/dev/sdd
-/dev/sde
-/dev/sdf
-/dev/sdg
-/dev/sdh
-/dev/sdi
-/dev/sdj
