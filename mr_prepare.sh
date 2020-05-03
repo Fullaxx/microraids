@@ -8,8 +8,38 @@
 : ${DIALOG_ITEM_HELP=4}
 : ${DIALOG_ESC=255}
 
+#Grab a list of all disks and partitions on the system
+DISKS="`lsblk | awk '{print $1,$6}' | grep disk | awk '{print $1}' | tr '\n' ' '`"
+PARTS="`lsblk | grep part | awk '{print $1}' | tr '└─' '\0'| tr '\n' ' '`"
 
-DEVICES="`find /dev -type b | grep -v loop`"
+#generate a list of devices that are disks with partitions that we assume are not blank and can not be used for the microraid
+DEVICES=""
+#echo "DISKS was $DISKS"
+#echo "PARTS was $PARTS"
+for disk in $DISKS; do
+	for part in $PARTS; do
+		if [[ "$part" =~ "$disk" ]]; then
+			#echo "compared disk $disk to part $part"
+			DEVICES+="$disk "
+		fi
+	done
+done
+
+#echo "USED DEVICES was $DEVICES"
+
+#Now we need to compare our list of devices containing partitions to our list of disks, eliminate duplicates and what's leftover are usable blank disks
+DEVICES+="$DISKS"
+#echo "ALL DEVICES was $DEVICES"
+BLANKDEVICES="`echo $DEVICES | tr ' ' '\n' | sort | uniq -u | tr '\n' ' '`"
+#echo "BLANK DEVICES was $BLANKDEVICES"
+
+#prepend the /dev/ prefix to each entry and rebuild DEVICES 
+DEVICES=""
+for device in $BLANKDEVICES; do
+	DEVICES+="/dev/$device "
+done
+#echo "checking $DEVICES"
+
 MOUNTMAP="mnt_locations.map"
 CHECKLISTSTRING=""
 devicecounter="0"
@@ -21,15 +51,11 @@ if [ -z "`which dialog`" ]; then
 	exit 1
 fi
 
-#loop through all devices, check if they have a partition mounted or not and add it to the 
-#list if it looks like this is a blank (unpartitioned, unmounted) device.
+#build our DEVICE_ARRAY so that we know if a user chooses disk 1, it means the actual /dev/whatever device
 for device in $DEVICES; do
-	#populate a list of devices that don't have something mounted from them, i.e. they are blank
-	if [ -z "`mount | grep $device`" ]; then 
-		DEVICE_ARRAY[$devicecounter]="$device"
-		CHECKLISTSTRING+="$devicecounter \"$device\" off "
-		devicecounter=$((devicecounter + 1))
-	fi
+	DEVICE_ARRAY[$devicecounter]="$device"
+	CHECKLISTSTRING+="$devicecounter \"$device\" off "
+	devicecounter=$((devicecounter + 1))
 done
 
 echo "devicecounter was $devicecounter"
