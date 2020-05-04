@@ -88,7 +88,6 @@ echo "Continue? (y/N)"
 read ANS
 echo
 
-# Why can't I use -a here on ubuntu??
 if [ "${ANS}" != "y" ] && [ "${ANS}" != "Y" ]; then
   echo "Patiently awaiting your orders."
   exit 0
