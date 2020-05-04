@@ -110,6 +110,8 @@ mr_info()
     echo
     echo "${NAME} appears to be mounted: "
     mount | grep ${raid_array[0]}
+    echo
+    df -h /dev/${raid_array[0]}
   fi
 }
 
