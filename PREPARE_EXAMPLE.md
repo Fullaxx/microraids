@@ -73,7 +73,7 @@ mount
 /dev/sdf1 on /mnt/VDG04BHK type btrfs (rw,nosuid,nodev,noatime,nodiratime)
 ```
 
-I use a script like this to ensure that my disks get mounted in the same place every startup. \
+I use a script like this to ensure that my disks get mounted in the same place every startup.
 ```bash
 for PART in /dev/disk/by-label/PV[ABCD]??????; do
   SERIAL=`basename ${PART}`
