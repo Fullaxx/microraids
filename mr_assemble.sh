@@ -36,8 +36,8 @@ echo
 
 # Wait for the kernel to autodetect the raid on the loops
 ${MDBIN} --auto-detect
-echo "Sleeping 2 seconds for kernel auto-detect ..."
-sleep 2
+echo "Sleeping 3 seconds for kernel auto-detect ..."
+sleep 3
 echo
 
 # Look for new raid device under /dev/md/
