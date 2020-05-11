@@ -8,7 +8,8 @@ btrfs scrub start /mnt/VAHAW81L
 btrfs scrub status /mnt/VAHAW81L
 ```
 
-If you have a microraids map file, you can use the provided scrub script to check all your filesystems.
+If you have a microraids map file, you can use the provided scrub script to check all your filesystems. \
+Your btrfs filesystem must be mounted to start scrubbuing, but your microraids do not have to be running.
 ```bash
 ./mr_scrub.sh <MAP> <start|status>
 
@@ -28,7 +29,7 @@ Error summary:    no errors found
 
 ## RAID Checking
 Another way to check your microraid is to ask the kernel to run an integrity check for you. \
-This command can be given to each raid individually.
+For each running microraid, this command can be given to each individually.
 ```bash
 ./mr_check.sh /dev/md/mynewraid
 ```
