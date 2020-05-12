@@ -40,44 +40,40 @@ echo "Sleeping 3 seconds for kernel auto-detect ..."
 sleep 3
 echo
 
-# Look for new raid device under /dev/md/
+# Determine raid device
 FIRSTDEV=`basename ${loop_array[0]}`
-NEWRAID=`grep -w ${FIRSTDEV} /proc/mdstat | awk '{print $1}'`
-
-if [ -z "${NEWRAID}" ]; then
+NEWMD=`grep -w ${FIRSTDEV} /proc/mdstat | awk '{print $1}'`
+if [ -z "${NEWMD}" ]; then
   echo "${FIRSTDEV} does not appear to be attached to a raid device!"
   exit 24
 fi
 
-if ${MDBIN} --detail /dev/${NEWRAID} | grep 'State :' | cut -d: -f2- | grep -qw inactive; then
-  echo "/dev/${NEWRAID} has been partially assembled, but did not run (state: inactive)"
+# Check to see if the raid did not run clean
+if ${MDBIN} --detail /dev/${NEWMD} | grep 'State :' | cut -d: -f2- | grep -qw inactive; then
+  echo "/dev/${NEWMD} has been partially assembled, but did not run (state: inactive)"
   echo "You will have to run manually and troubleshoot:"
-  echo "mdadm -R /dev/${NEWRAID}"
-  echo "mdadm --detail /dev/${NEWRAID}"
+  echo "mdadm -R /dev/${NEWMD}"
+  echo "mdadm --detail /dev/${NEWMD}"
   exit 25
 fi
 
-#RAIDCOUNT=`ls -1 /dev/md/ 2>/dev/null | wc -l`
-#if [ "${RAIDCOUNT}" == "0" ]; then
-#  echo "No raid devices found under /dev/md/"
-#  echo "${NEWRAID} did not assemble correctly!"
-#  echo "If your array is degraded, you might have to run manually:"
-#  echo "mdadm -R /dev/${NEWRAID} ${loop_array[@]}"
-#  echo "mdadm --detail /dev/${NEWRAID}"
-#  exit 10
-#fi
+# Print raid info
+echo -n "/dev/${NEWMD} has been assembled:"
+${MDBIN} --detail /dev/${NEWMD} | grep 'State :' | cut -d: -f2-
+grep -w ${NEWMD} /proc/mdstat
 
-for DEV in /dev/md/*; do
-  RP=`realpath ${DEV}`
-  if [ "${RP}" == "/dev/${NEWRAID}" ]; then
-    grep ${NEWRAID} /proc/mdstat
-    echo "${DEV} is ready!"
-    echo -n "State:"
-    ${MDBIN} --detail /dev/${NEWRAID} | grep 'State :' | cut -d: -f2-
-    exit 0
-  fi
-done
+# Look for raid symlink under /dev/md/
+if [ -d /dev/md ]; then
+  for DEV in /dev/md/*; do
+    RP=`realpath ${DEV}`
+    if [ "${RP}" == "/dev/${NEWMD}" ]; then
+      MRSYMLINK="${DEV}"
+    fi
+  done
+fi
 
-# We couldn't find the named raid device?
-echo "raid device not found under /dev/md/"
-exit 26
+if [ -n "${MRSYMLINK}" ]; then
+  echo "${MRSYMLINK} -> /dev/${NEWMD}"
+fi
+
+exit 0
