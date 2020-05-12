@@ -38,6 +38,7 @@ Also each microraid can be checked independently for integrity and consistency i
 * Step 3: [Start/Stop your microraid](https://github.com/Fullaxx/microraids/blob/master/STOP_START_EXAMPLE.md)
 * Step 4: [Check your microraid](https://github.com/Fullaxx/microraids/blob/master/CHECK_EXAMPLE.md)
 * Step 5: [Replace a faulty image](https://github.com/Fullaxx/microraids/blob/master/REPLACE_EXAMPLE.md)
+* Step 6: [Tuning your microraid](https://github.com/Fullaxx/microraids/blob/master/TUNING.md) (Optional)
 
 ### Tested Operating Systems
 * [RapidLinux](https://github.com/Fullaxx/RapidLinux)
