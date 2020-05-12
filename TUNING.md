@@ -27,8 +27,8 @@ This will set the amount of memory available for the stripe cache. \
 This value is in units of Kibibytes and must be between 17 and 32768. \
 `memory_consumed = system_page_size * nr_disks * stripe_cache_size` 
 [Source](https://www.cyberciti.biz/tips/linux-raid-increase-resync-rebuild-speed.html)
-| Value | # | Formula      | Memory   |
-| ----- | - | ------------ | -------- |
+| Value | # | Formula        | Memory   |
+| ----- | - | -------------- | -------- |
 |  1024 | 4 | =(4\*4\*1024)  |   16 MiB |
 |  2048 | 4 | =(4\*4\*2048)  |   32 MiB |
 |  4096 | 4 | =(4\*4\*4096)  |   64 MiB |
