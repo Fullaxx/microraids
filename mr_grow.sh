@@ -103,7 +103,13 @@ RAIDDEV=`cat ${TMPFILE} | grep 'has been assembled: clean' | awk '{print $1}'`
 rm -f ${TMPFILE}
 echo
 
-${MDBIN} -G ${RAIDDEV} -z max
+# https://documentation.suse.com/sles/12-SP4/html/SLES-all/cha-raid-resize.html
+# --assume-clean
+# The array uses any space that has been added to the devices, but this space will not be synchronized.
+# This is recommended for RAID 1 because the synchronization is not needed.
+# It can be useful for other RAID levels if the space that was added to the member devices was pre-zeroed.
+
+${MDBIN} -G ${RAIDDEV} -z max --assume-clean
 ${MDBIN} -D ${RAIDDEV} | grep -e "Array Size" -e "Dev Size"
 echo
 
