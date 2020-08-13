@@ -39,6 +39,7 @@ Also each microraid can be checked independently for integrity and consistency i
 * Step 4: [Check your microraid](https://github.com/Fullaxx/microraids/blob/master/CHECK.md)
 * Step 5: [Replace a faulty image](https://github.com/Fullaxx/microraids/blob/master/REPLACE.md)
 * Step 6: [Tuning your microraid](https://github.com/Fullaxx/microraids/blob/master/TUNING.md) (Optional)
+* Step 7: [Grow your microraid](https://github.com/Fullaxx/microraids/blob/master/GROW.md) (Optional)
 
 ### Tested Operating Systems
 * [RapidLinux](https://github.com/Fullaxx/RapidLinux)
