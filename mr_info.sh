@@ -58,7 +58,11 @@ mr_info()
 #echo "INDEX: ${INDEX}"
 
   echo "Found ${#dimg_array[@]} disk images for ${NAME}:"
-  for DI in ${dimg_array[@]}; do echo ${DI}; done
+  for DI in ${dimg_array[@]}; do
+    USED=`du -sh ${DI} | awk '{print $1}'`
+    AVAIL=`du -sh --apparent-size ${DI} | awk '{print $1}'`
+    echo "${DI} (${USED}/${AVAIL})"
+  done
   echo
 
 # If ${NAME} has no loops, we are done here
