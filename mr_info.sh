@@ -37,7 +37,7 @@ mr_info()
     DIMG=`ls -1 ${LINE}/${NAME}/${NAME}.?.rimg`
     if [ ! -r "${DIMG}" ]; then
       echo "Could not find disk images for ${NAME} using this map!"
-      exit 6
+      exit 7
     fi
     dimg_array[${INDEX}]="${DIMG}"
     LOOP=`${LOBIN} -a | grep -w ${DIMG} | cut -d: -f1`
@@ -61,7 +61,9 @@ mr_info()
   for DI in ${dimg_array[@]}; do
     USED=`du -sh ${DI} | awk '{print $1}'`
     AVAIL=`du -sh --apparent-size ${DI} | awk '{print $1}'`
-    echo "${DI} (${USED}/${AVAIL})"
+    BYTES=`du -b ${DI} | awk '{print $1}'`
+    BLKCOUNT=`${CALCBIN} "${BYTES}/4096" | awk '{print $1}'`
+    echo "${DI} (${USED}/${AVAIL}) [${BLKCOUNT} 4k-blocks]"
   done
   echo
 
@@ -88,7 +90,7 @@ mr_info()
   if [ "${UNIQUERAIDCOUNT}" != "1" ]; then
     echo "${NAME} appears to be attached to multiple devices?"
     echo "${raid_array[@]}"
-    exit 7
+    exit 8
   fi
 
 # Does ${NAME} have a named raid device?
@@ -152,6 +154,12 @@ MDBIN=`PATH="/sbin:/usr/sbin:$PATH" which mdadm`
 if [ "$?" != "0" ]; then
   echo "mdadm not found!"
   exit 5
+fi
+
+CALCBIN=`which calc`
+if [ "$?" != "0" ]; then
+  echo "calc not found!"
+  exit 6
 fi
 
 if [ "$#" == "1" ]; then
