@@ -18,9 +18,15 @@ if [ -L ${RAIDDEV} ]; then
   MD=`readlink ${RAIDDEV} | cut -d/ -f2`
 elif [ -b ${RAIDDEV} ]; then
   MD=`basename ${RAIDDEV}`
+elif [ -b /dev/${RAIDDEV} ]; then
+  MD="${RAIDDEV}"
 else
   echo "I dont know what to do with ${RAIDDEV}!"
   exit 3
+fi
+
+if ! grep "^${MD} : " /proc/mdstat; then
+  echo "Did not find ${RAIDDEV} in /proc/mdstat"
 fi
 
 SA="/sys/block/${MD}/md/sync_action"
