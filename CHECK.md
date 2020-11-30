@@ -27,6 +27,13 @@ Rate:             170.67KiB/s
 Error summary:    no errors found
 ```
 
+## BTRFS Offline Data Check
+Another way to check your data blocks is to use the btrfs check utility on an unmounted partition. \
+This expects that the filesystem is otherwise OK, and is basically an offline scrub but does not repair data from spare copies.
+```bash
+btrfs check --check-data-csum /dev/sdX1
+```
+
 ## RAID Checking
 Another way to check your microraid is to ask the kernel to run an integrity check for you. \
 For each running microraid, this command can be given to each individually.
