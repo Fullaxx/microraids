@@ -121,8 +121,6 @@ mr_info()
   fi
 }
 
-set -e
-
 if [ -z "$1" ]; then
   echo "$0: <MAP> [NAME]"
   exit 1
@@ -161,6 +159,10 @@ if [ "$?" != "0" ]; then
   echo "calc not found!"
   exit 6
 fi
+
+# Place this after all the which commands
+# So that which does trigger an exit w/o error message
+set -e
 
 if [ "$#" == "1" ]; then
   list_all "${MAP}"
