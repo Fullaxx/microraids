@@ -1,5 +1,15 @@
 #!/bin/bash
 
+active_loop_count()
+{
+  COUNT="0"
+  while read -r LINE; do
+    DIMG=`ls -1 ${LINE}/${NAME}/${NAME}.?.rimg`
+    if ${LOBIN} -a | grep -qw ${DIMG}; then COUNT=$(( COUNT+1 )); fi
+  done < ${MAP}
+  echo ${COUNT}
+}
+
 list_all()
 {
   MAP="$1"
@@ -21,7 +31,15 @@ list_all()
     exit 0
   fi
   echo "Found ${MRCOUNT} microraids:"
-  echo "${loc_array[@]}" | xargs -n1 ls -1 | sort -u
+#  echo "${loc_array[@]}" | xargs -n1 ls -1 | sort -u
+  for NAME in `echo "${loc_array[@]}" | xargs -n1 ls -1 | sort -u`; do
+    ALC=`active_loop_count "${MAP}" "${NAME}"`
+    if [ "${ALC}" == "0" ]; then
+      echo "${NAME}"
+    else
+      echo "${NAME}: (active)"
+    fi
+  done
 }
 
 mr_info()
