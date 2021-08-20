@@ -50,7 +50,7 @@ Also each microraid can be checked independently for integrity and consistency i
 * [Cooler Master Elite 110](https://www.coolermaster.com/catalog/cases/mini-itx/elite110/)
 * ASRock [J3455B-ITX](https://www.asrock.com/MB/Intel/J3455B-ITX/) / [J4005B-ITX](https://www.asrock.com/mb/Intel/J4005B-ITX/) / [J4105B-ITX](https://www.asrock.com/mb/Intel/J4105B-ITX/) / [J4125B-ITX](https://www.asrock.com/mb/Intel/J4125B-ITX/)
   - These ASRock Mini-ITX boards support PCIe in x2 mode
-* [Ableconn PEX-SA130](https://www.amazon.com/dp/B07595M2MK)
+* [Ableconn PEX-SA130](http://ableconn.com/support_1.php?gid=120)
   - ASM1062 chipset supports 2x Port Multiplier
 * 2x [Mediasonic ProBox HF2-SU3S2](https://www.amazon.com/dp/B003X26VV4)
   - Each ProBox connects 4x 3.5" drives of any size via eSATA
