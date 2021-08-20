@@ -50,7 +50,7 @@ Also each microraid can be checked independently for integrity and consistency i
 * [Cooler Master Elite 110](https://www.coolermaster.com/catalog/cases/mini-itx/elite110/)
 * ASRock [J3455B-ITX](https://www.asrock.com/MB/Intel/J3455B-ITX/) / [J4005B-ITX](https://www.asrock.com/mb/Intel/J4005B-ITX/) / [J4105B-ITX](https://www.asrock.com/mb/Intel/J4105B-ITX/) / [J4125B-ITX](https://www.asrock.com/mb/Intel/J4125B-ITX/)
   - These ASRock Mini-ITX boards support PCIe in x2 mode
-* [Ableconn PEX-SA130](http://ableconn.com/support_1.php?gid=120)
+* [Ableconn PEX-SA130](http://ableconn.com/products_2.php?gid=120)
   - ASM1062 chipset supports 2x Port Multiplier
 * 2x [Mediasonic ProBox HF2-SU3S2](https://www.amazon.com/dp/B003X26VV4)
   - Each ProBox connects 4x 3.5" drives of any size via eSATA
@@ -60,6 +60,8 @@ Also each microraid can be checked independently for integrity and consistency i
 ### Alternate Hardware
 * [SYBA SI-PEX40072](https://www.sybausa.com/index.php?route=product/product&product_id=155)
   - This Marvell Chipset also supports 2x Port Multiplier
+* [Ableconn PEX-SA134](http://ableconn.com/products_2.php?gid=124)
+  - 2xASM1062 chips support 4x Port Multiplier; requires PCIe x4 lanes
 
 ### More Information
 * [bitrot and atomic cows](https://arstechnica.com/information-technology/2014/01/bitrot-and-atomic-cows-inside-next-gen-filesystems/)
