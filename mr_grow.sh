@@ -114,7 +114,7 @@ ${MDBIN} -D ${RAIDDEV} | grep -e "Array Size" -e "Dev Size"
 echo
 
 echo "You may now resize your FS"
-echo "EXT4 HINT   : e2fsck -f ${RAIDDEV}; resize2fs ${RAIDDEV}"
+echo "EXT4 HINT   : e2fsck -f -y ${RAIDDEV} && resize2fs ${RAIDDEV}"
 echo "REISER HINT : resize_reiserfs ${RAIDDEV}"
 echo "XFS HINT    : mount ${RAIDDEV} /mnt/MOUNTPOINT; xfs_growfs -d /mnt/MOUNTPOINT"
 echo "BTRFS HINT  : mount ${RAIDDEV} /mnt/MOUNTPOINT; btrfs filesystem resize max /mnt/MOUNTPOINT"
