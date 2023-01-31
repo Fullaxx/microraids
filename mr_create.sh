@@ -141,9 +141,16 @@ echo >> ${LOG}
 #echo ${file_array[@]}
 #echo ${loop_array[@]}
 
+# Make sure we dont give mdadm chunk arguments for a RAID 1
+if [ "${RL}" != "1" ]; then
+  CHUNKARG="-c ${CHUNK}"
+else
+  CHUNKARG=""
+fi
+
 # Assemble our raid device from the LOOP devices
-${MDBIN} -C /dev/md/${RAIDNAME} --assume-clean -l ${RL} -n ${NUMDEV} -c ${CHUNK} ${loop_array[@]}
-echo "mdadm -C /dev/md/${RAIDNAME} --assume-clean -l ${RL} -n ${NUMDEV} -c ${CHUNK} ${loop_array[@]}" >> ${LOG}
+${MDBIN} -C /dev/md/${RAIDNAME} --assume-clean -l ${RL} -n ${NUMDEV} ${CHUNKARG} ${loop_array[@]}
+echo "mdadm -C /dev/md/${RAIDNAME} --assume-clean -l ${RL} -n ${NUMDEV} ${CHUNKARG} ${loop_array[@]}" >> ${LOG}
 echo >> ${LOG}
 echo "/dev/md/${RAIDNAME} is ready!"
 
