@@ -90,6 +90,23 @@ if [ "${CNT}" == "${BLOCKS}" ]; then
   exit 14
 fi
 
+# Display the new size of the array before growing
+NUMDEVFIVE=$(( INDEX-1 ))
+NUMDEVSIX=$(( INDEX-2 ))
+ONESIZE=`${CALCBIN} "((${CNT}*${BS})/1e9)" | awk '{print $1}'`
+FIVESIZE=`${CALCBIN} "((${CNT}*${BS}*${NUMDEVFIVE})/1e9)" | awk '{print $1}'`
+SIXSIZE=`${CALCBIN} "((${CNT}*${BS}*${NUMDEVSIX})/1e9)" | awk '{print $1}'`
+echo "New Array Size (if RAID 1): ${ONESIZE} GB"
+echo "New Array Size (if RAID 5): ${FIVESIZE} GB"
+echo "New Array Size (if RAID 6): ${SIXSIZE} GB"
+echo "Would you like to continue? (y/N)"
+read ANS
+if [ "${ANS}" != "y" ] && [ "${ANS}" != "Y" ]; then
+  echo
+  echo "Array unmodified"
+  exit 0
+fi
+
 for IMG in ${dimg_array[@]}; do
   echo "Increasing ${IMG} to ${CNT} 4k-blocks ..."
   dd if=/dev/zero of=${IMG} bs=${BS} count=0 seek=${CNT} status=none
