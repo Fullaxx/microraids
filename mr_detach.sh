@@ -76,5 +76,7 @@ fi
 # echo "${loop_array[@]}"
 for LOOP in ${loop_array[@]}; do
   echo "Detaching ${LOOP} ..."
-  ${LOBIN} -d ${LOOP}
+  ${LOBIN} -d ${LOOP} &
 done
+
+wait
