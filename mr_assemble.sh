@@ -38,7 +38,6 @@ echo
 ${MDBIN} --auto-detect
 echo "Sleeping 3 seconds for kernel auto-detect ..."
 sleep 3
-echo
 
 # Determine raid device
 FIRSTDEV=`basename ${loop_array[0]}`
@@ -47,6 +46,8 @@ if [ -z "${NEWMD}" ]; then
   echo "${FIRSTDEV} does not appear to be attached to a raid device!"
   exit 24
 fi
+echo "Found ${FIRSTDEV} on ${NEWMD}"
+echo
 
 # Check to see if the raid did not run clean
 if ${MDBIN} --detail /dev/${NEWMD} | grep 'State :' | cut -d: -f2- | grep -qw inactive; then
