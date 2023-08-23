@@ -36,8 +36,8 @@ echo
 
 # Wait for the kernel to autodetect the raid on the loops
 ${MDBIN} --auto-detect
-echo "Sleeping 3 seconds for kernel auto-detect ..."
-sleep 3
+echo "Sleeping 4 seconds for kernel auto-detect ..."
+sleep 4
 
 # Determine raid device
 FIRSTDEV=`basename ${loop_array[0]}`
